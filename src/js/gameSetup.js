@@ -1,4 +1,3 @@
-//Obtendo os elementos do DOM com que vamos interagir
 
 const square = document.getElementsByTagName('input'); 
 
