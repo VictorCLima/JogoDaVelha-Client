@@ -8,26 +8,38 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
-  <body>
-    <form id="name">
+<body>
+
+  <main>
+    
       <div class="wrapper-contend">
-        <div class="wrapper-btn">
-          <button id="enterRoom" class="btn-game" type="subtmit">Entrar na fila</button>
-          <input type="text" name="username" placeholder="Digite seu nome"></input>
-          <button id="btn-leave" class="btn-game">Sair da fila</button>
+        <div class="wrapper-board">
+          <div> <input type="button" value="_"><input type="button" value="_"><input type="button" value="_"> </div>
+          <div> <input type="button" value="_"><input type="button" value="_"><input type="button" value="_"> </div>
+          <div> <input type="button" value="_"><input type="button" value="_"><input type="button" value="_"> </div>
         </div>
+
         <div id="waiting-room" class="room">
+          
           <div id="player" class="players">
             <label>Victor</label> <a>Convidar</a>      
           </div>
+
           <div id="player" class="players">
             <label>Victor</label> <a>Convidar</a>       
           </div>
+
+          <div class="wrapper-button">
+            <button id="restart"class='restart'>Reiniciar</button>
+            <button class="close">Sair do jogo</button>
+          </div>
+
         </div>
       </div>
-    </form>  
-
-    <script src="js/connection.js"></script>
-  </body>
+    </main>
+   
+  <script src="js/gameSetup.js"></script>
+ 
+</body>
   
 </html>
