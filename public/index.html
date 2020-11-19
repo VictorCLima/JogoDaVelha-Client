@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jogo da Velha</title>
-  <link type="text/css" rel='stylesheet' href='./css/style.css' />
-  <link type="text/css" rel='stylesheet' href='./css/reset.css' />
-  <meta  header="Access-Control-Allow-Origin: *">
+  <meta charset="UTF-8">
+  <title>Jogo da Velha</title>  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
+
+
   <body>
-    <form id="name">
+    
       <div class="wrapper-contend">
         <div class="wrapper-btn">
-          <button id="enterRoom" class="btn-game" type="subtmit">Entrar na fila</button>
+          <button id="enterRoom" onclick="" class="btn-game" type="subtmit">Entrar na fila</button>
           <input type="text" name="username" placeholder="Digite seu nome"></input>
           <button id="btn-leave" class="btn-game">Sair da fila</button>
         </div>
@@ -25,9 +24,9 @@
           </div>
         </div>
       </div>
-    </form>  
+    
 
-    <script src="js/connection.js"></script>
+    <script src="./assets/js/bundle.js"></script>
   </body>
   
 </html>

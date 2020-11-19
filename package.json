@@ -4,7 +4,7 @@
   "description": "Trabalho da disciplina de Tópicos Especiais I sobre Aplicações Móveis",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "load-wp": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -19,16 +19,21 @@
   "homepage": "https://github.com/iugernaut/JogoDaVelha-Client#readme",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "socket.io-client": "^3.0.1",
+    "css-loader": "^5.0.1",
+    "socket.io-client": "^3.0.3",
+    "style-loader": "^2.0.0",
     "sucrase": "^3.16.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/runtime": "^7.12.5",
     "babel-loader": "^8.2.1",
-    "webpack": "^5.4.0",
+    "core-js": "^2.6.11",
+    "regenerator-runtime": "^0.13.7",
+    "webpack": "^5.6.0",
     "webpack-cli": "^4.2.0"
   }
 }
