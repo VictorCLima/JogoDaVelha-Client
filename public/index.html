@@ -7,14 +7,18 @@
 </head>
 
 
-  <body>
-    
+  <body>    
       <div class="wrapper-contend">
         <div class="wrapper-btn">
-          <button id="enterRoom" onclick="" class="btn-game" type="subtmit">Entrar na fila</button>
-          <input type="text" name="username" placeholder="Digite seu nome"></input>
+
+          <form id="form">
+            <input type="text" name="username" placeholder="Digite seu nome"></input>
+            <button id="connetn" onclick="Connection()" class="btn-game" type="submit">Entrar na fila</button>
+          </form>
+
           <button id="btn-leave" class="btn-game">Sair da fila</button>
         </div>
+
         <div id="waiting-room" class="room">
           <div id="player" class="players">
             <label>Victor</label> <a>Convidar</a>      
@@ -22,6 +26,7 @@
           <div id="player" class="players">
             <label>Victor</label> <a>Convidar</a>       
           </div>
+
         </div>
       </div>
     

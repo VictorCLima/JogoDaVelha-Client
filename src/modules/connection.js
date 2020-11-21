@@ -1,25 +1,35 @@
- import  io  from 'socket.io-client';
+import  io  from 'socket.io-client';
+import $ from 'jquery';
 
-  const Connection = () => {
+ const Connection = () => {
 
-    const socket = io('http://localhost:5000/'); 
+ /*   const renderUser = (user) => {
+    $('.user').append('<div>'+ user.name +' </div>')
+  } */
 
-  } 
-  export default Connection; 
-/* 
-    $('#name').submit(function(event) {
-      event.preventDefault();
+  $('#form').submit(function(event) {
+    alert( "foi enviado" );
+    event.preventDefault();  
+
+    var user = $('input[name=username').val();
+
+    if(user.length != 0) {
+      var userObject = {
+      name: name, 
+    }
+    renderUser(userObject);
+
+    socket.emit('join', name)
+    console.log('name');
+    }
+  })  
   
-      var name = $('input[name=username]').val();
-  
-      if(name.length != 0) {
-        var userObject = {
-        name: name, 
-      }
-      socket.emit('sendUser', name)
-      }
-    })  
+}
+export default Connection; 
 
-    
-  } 
-    export default Connection;*/
+document.addEventListener('DOMContentLoaded', () => {
+  connectButton = document.getElementById('connect');
+  
+});
+ 
+

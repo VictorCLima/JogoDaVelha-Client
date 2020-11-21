@@ -1,6 +1,7 @@
 
 //JS
-import  './modules/connection.js';
+import Connection from './modules/connection.js';
+import './modules/disconnection.js';
 
 //css
 import './assets/css/style.css';
