@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Jogo da Velha</title>  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Jogo da Velha</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
 
 
-  <body>    
-      <div class="wrapper-contend">
-        <div class="wrapper-btn">
+    <body>
+        <div class="wrapper-contend">
+            <div class="wrapper-btn">
+                <section id="form">
+                    <input type="text" name="username" placeholder="Digite seu nome" id="username-input" />
 
-          <form id="form">
-            <input type="text" name="username" placeholder="Digite seu nome"></input>
-            <button id="connetn" onclick="Connection()" class="btn-game" type="submit">Entrar na fila</button>
-          </form>
+                    <button id="register-button" class="btn-game">Entrar na fila</button>
+                </section>
 
-          <button id="btn-leave" class="btn-game">Sair da fila</button>
+                <button id="btn-leave" class="btn-game">Sair da fila</button>
+            </div>
+
+            <div id="waiting-room" class="room">
+                <div id="player" class="players">
+                    <label>Victor</label> <a>Convidar</a>
+                </div>
+
+                <div id="player" class="players">
+                    <label>Victor</label> <a>Convidar</a>
+                </div>
+            </div>
         </div>
 
-        <div id="waiting-room" class="room">
-          <div id="player" class="players">
-            <label>Victor</label> <a>Convidar</a>      
-          </div>
-          <div id="player" class="players">
-            <label>Victor</label> <a>Convidar</a>       
-          </div>
 
-        </div>
-      </div>
-    
+        <script src="./assets/js/bundle.js"></script>
+    </body>
 
-    <script src="./assets/js/bundle.js"></script>
-  </body>
-  
 </html>

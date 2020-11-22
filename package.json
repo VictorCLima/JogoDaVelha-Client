@@ -4,7 +4,8 @@
   "description": "Trabalho da disciplina de Tópicos Especiais I sobre Aplicações Móveis",
   "main": "index.js",
   "scripts": {
-    "load-wp": "webpack -w"
+    "load-wp": "webpack -w",
+    "serve": "serve public/"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,17 @@
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/runtime": "^7.12.5",
+    "@types/socket.io-client": "^1.4.34",
     "babel-loader": "^8.2.1",
     "core-js": "^2.6.11",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "prettier": "^2.2.0",
     "regenerator-runtime": "^0.13.7",
     "webpack": "^5.6.0",
     "webpack-cli": "^4.2.0"
