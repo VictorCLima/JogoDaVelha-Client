@@ -1,4 +1,4 @@
-const enterLobbyEvent = socket => {
+const enterLobbyEvent = connection => {
     const userNameInput = document.querySelector('#username-input');
     const submitButton = document.querySelector('#register-button');
 
@@ -7,7 +7,7 @@ const enterLobbyEvent = socket => {
 
         if (!name) return;
 
-        socket.emit('register', { name });
+        connection.connect(name);
     });
 };
 

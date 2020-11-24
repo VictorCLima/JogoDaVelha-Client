@@ -81,15 +81,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-var enterLobbyEvent = function enterLobbyEvent(socket) {
+var enterLobbyEvent = function enterLobbyEvent(connection) {
   var userNameInput = document.querySelector('#username-input');
   var submitButton = document.querySelector('#register-button');
   submitButton.addEventListener('click', function () {
     var name = userNameInput.value;
     if (!name) return;
-    socket.emit('register', {
-      name: name
-    });
+    connection.connect(name);
   });
 };
 
@@ -117,8 +115,8 @@ __webpack_require__.r(__webpack_exports__);
  // Utils
 
 
-function getUserlistEvent(socket, loggedUsername) {
-  socket.on('userlist', function (userlist) {
+function getUserlistEvent(connection) {
+  connection.socket.on('userlist', function (userlist) {
     var usersDiv = document.querySelector('#waiting-room');
 
     if (!usersDiv) {
@@ -127,7 +125,7 @@ function getUserlistEvent(socket, loggedUsername) {
 
     (0,_utils__WEBPACK_IMPORTED_MODULE_1__.removeElementsChilds)(usersDiv);
     userlist.forEach(function (user) {
-      var listItem = (0,_components_UserListItem__WEBPACK_IMPORTED_MODULE_0__.default)(user, loggedUsername, socket);
+      var listItem = (0,_components_UserListItem__WEBPACK_IMPORTED_MODULE_0__.default)(user, connection.username, connection.socket);
       usersDiv.appendChild(listItem);
     });
   });
@@ -204,24 +202,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_socket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/socket */ "./src/constants/socket.js");
 
 
+
+var connect = function connect(name) {
+  this.registerUser(name);
+  this.socket.emit('register', {
+    name: name
+  });
+};
+
+var registerUser = function registerUser(name) {
+  this.username = name;
+  localStorage.setItem('username', name);
+};
+
 var initConnection = function initConnection() {
   var connection = {
     socket: (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.default)(_constants_socket__WEBPACK_IMPORTED_MODULE_1__.SOCKET_URL),
     username: null
   };
-
-  connection.connect = function (name) {
-    this.socket.emit('register', {
-      name: name
-    });
-    this.registerUser(name);
-  };
-
-  connection.resgisterUser = function (name) {
-    this.username = name;
-    localStorage.setItem('username', name);
-  };
-
+  connection.connect = connect.bind(connection);
+  connection.registerUser = registerUser.bind(connection);
   return connection;
 };
 
@@ -245,10 +245,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../events */ "./src/events/index.js");
 
 var initEvents = function initEvents(connection) {
-  var socket = connection.socket,
-      username = connection.username;
-  (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(socket);
-  (0,_events__WEBPACK_IMPORTED_MODULE_0__.getUserlistEvent)(socket, username);
+  (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(connection);
+  (0,_events__WEBPACK_IMPORTED_MODULE_0__.getUserlistEvent)(connection);
 };
 
 /***/ }),

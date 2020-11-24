@@ -6,6 +6,7 @@ const UserListItem = (user, loggedUsername, socket) => {
             innerText: user.name,
         }),
     ];
+
     if (user.name !== loggedUsername) {
         children.push(
             createElement('button', {
