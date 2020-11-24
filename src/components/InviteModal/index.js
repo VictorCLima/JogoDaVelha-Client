@@ -1,6 +1,6 @@
-import createElement from './createElement.js';
+import { createElement } from '../../utils';
 
-export default function createModal(invitingUserName) {
+export default function Modal(invitingUserName, loggedUserName, socket) {
     const modal = createElement('div', {}, [
         document.createTextNode(
             `${invitingUserName} esta te chamando para a batalha`,
@@ -8,10 +8,22 @@ export default function createModal(invitingUserName) {
 
         createElement('button', {
             innerText: 'Aceitar',
+            onclick: () => {
+                socket.emit('acceptInvite', {
+                    inviterName: invitingUserName,
+                    name: loggedUserName,
+                });
+            },
         }),
 
         createElement('button', {
             innerText: 'Recusar',
+            onclick: () => {
+                socket.emit('refuseInvite', {
+                    inviterName: invitingUserName,
+                    name: loggedUserName,
+                });
+            },
         }),
     ]);
 

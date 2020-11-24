@@ -1,6 +1,46 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/components/InviteModal/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/InviteModal/index.js ***!
+  \*********************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ Modal
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
+
+function Modal(invitingUserName, loggedUserName, socket) {
+  var modal = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('div', {}, [document.createTextNode("".concat(invitingUserName, " esta te chamando para a batalha")), (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('button', {
+    innerText: 'Aceitar',
+    onclick: function onclick() {
+      socket.emit('acceptInvite', {
+        inviterName: invitingUserName,
+        name: loggedUserName
+      });
+    }
+  }), (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('button', {
+    innerText: 'Recusar',
+    onclick: function onclick() {
+      socket.emit('refuseInvite', {
+        inviterName: invitingUserName,
+        name: loggedUserName
+      });
+    }
+  })]);
+  return modal;
+}
+
+/***/ }),
+
 /***/ "./src/components/UserListItem/index.js":
 /*!**********************************************!*\
   !*** ./src/components/UserListItem/index.js ***!
@@ -117,12 +157,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function getUserlistEvent(connection) {
   connection.socket.on('userlist', function (userlist) {
+    if (!connection.username) return;
     var usersDiv = document.querySelector('#waiting-room');
-
-    if (!usersDiv) {
-      return;
-    }
-
+    if (!usersDiv) return;
     (0,_utils__WEBPACK_IMPORTED_MODULE_1__.removeElementsChilds)(usersDiv);
     userlist.forEach(function (user) {
       var listItem = (0,_components_UserListItem__WEBPACK_IMPORTED_MODULE_0__.default)(user, connection.username, connection.socket);
@@ -140,6 +177,7 @@ function getUserlistEvent(connection) {
 /*! namespace exports */
 /*! export enterLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/enterLobby.js .default */
 /*! export getUserlistEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getUserlist.js .default */
+/*! export receiveNotificationEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/receiveNotification.js .default */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.d, __webpack_require__.r, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -148,12 +186,45 @@ function getUserlistEvent(connection) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "enterLobbyEvent": () => /* reexport safe */ _enterLobby__WEBPACK_IMPORTED_MODULE_0__.default,
-/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_1__.default
+/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_1__.default,
+/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_2__.default
 /* harmony export */ });
 /* harmony import */ var _enterLobby__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enterLobby */ "./src/events/enterLobby.js");
 /* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
+/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
 
 
+
+
+/***/ }),
+
+/***/ "./src/events/receiveNotification.js":
+/*!*******************************************!*\
+  !*** ./src/events/receiveNotification.js ***!
+  \*******************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ receiveNotification
+/* harmony export */ });
+/* harmony import */ var _components_InviteModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/InviteModal */ "./src/components/InviteModal/index.js");
+
+function receiveNotification(connection) {
+  connection.socket.on('newInvite', function (_ref) {
+    var inviterName = _ref.inviterName;
+    if (!connection.username) return;
+    var body = document.querySelector('body');
+    if (!body) return;
+    var modal = (0,_components_InviteModal__WEBPACK_IMPORTED_MODULE_0__.default)(inviterName, connection.username, connection.socket);
+    body.appendChild(modal);
+  });
+}
 
 /***/ }),
 
@@ -247,6 +318,7 @@ __webpack_require__.r(__webpack_exports__);
 var initEvents = function initEvents(connection) {
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.getUserlistEvent)(connection);
+  (0,_events__WEBPACK_IMPORTED_MODULE_0__.receiveNotificationEvent)(connection);
 };
 
 /***/ }),

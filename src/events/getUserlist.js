@@ -5,11 +5,11 @@ import { removeElementsChilds } from '../utils';
 
 export default function getUserlistEvent(connection) {
     connection.socket.on('userlist', userlist => {
+        if (!connection.username) return;
+
         const usersDiv = document.querySelector('#waiting-room');
 
-        if (!usersDiv) {
-            return;
-        }
+        if (!usersDiv) return;
 
         removeElementsChilds(usersDiv);
 
