@@ -7,6 +7,13 @@ const connect = function (name) {
     this.socket.emit('register', { name });
 };
 
+const disconnect = function () {
+    this.socket.emit('logout', this.username);
+    this.username = null;
+
+    localStorage.removeItem('username');
+};
+
 const registerUser = function (name) {
     this.username = name;
 
@@ -20,6 +27,7 @@ export const initConnection = () => {
     };
 
     connection.connect = connect.bind(connection);
+    connection.disconnect = disconnect.bind(connection);
     connection.registerUser = registerUser.bind(connection);
 
     return connection;

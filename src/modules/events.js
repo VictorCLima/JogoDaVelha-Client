@@ -1,13 +1,18 @@
 import {
     enterLobbyEvent,
+    exitLobbyEvent,
+    loadUserEvent,
     getUserlistEvent,
     receiveNotificationEvent,
 } from '../events';
-import loadUser from '../events/loadUser';
 
 export const initEvents = connection => {
-    loadUser(connection);
-    enterLobbyEvent(connection);
+    loadUserEvent(connection);
+
     getUserlistEvent(connection);
+
+    enterLobbyEvent(connection);
+
     receiveNotificationEvent(connection);
+    exitLobbyEvent(connection);
 };

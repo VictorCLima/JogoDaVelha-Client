@@ -5,7 +5,6 @@ export default function loadUser(connection) {
         const username = localStorage.getItem('username');
 
         if (!username) push('/');
-
-        connection.connect(username);
+        else connection.connect(username);
     });
 }
