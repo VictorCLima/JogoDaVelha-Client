@@ -6,7 +6,6 @@ export default function createElement(
     const element = document.createElement(elementName);
 
     const optionKeys = Object.keys(options);
-
     optionKeys.forEach(key => {
         const value = options[key];
 

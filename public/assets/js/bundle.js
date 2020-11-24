@@ -19,15 +19,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
 
 
-var UserListItem = function UserListItem(user) {
+var UserListItem = function UserListItem(user, loggedUsername, socket) {
+  var children = [(0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('label', {
+    innerText: user.name
+  })];
+
+  if (user.name !== loggedUsername) {
+    children.push((0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('button', {
+      innerText: 'Convidar',
+      onclick: function onclick() {
+        socket.emit('invite', {
+          inviterName: loggedUsername,
+          targetName: user.name
+        });
+      }
+    }));
+  }
+
   var userListItem = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('div', {
     id: user.id,
     className: 'players'
-  }, [(0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('label', {
-    innerText: user.name
-  }), (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('a', {
-    innerText: 'Convidar'
-  })]);
+  }, children);
   return userListItem;
 };
 
@@ -105,12 +117,17 @@ __webpack_require__.r(__webpack_exports__);
  // Utils
 
 
-function getUserlistEvent(socket) {
+function getUserlistEvent(socket, loggedUsername) {
   socket.on('userlist', function (userlist) {
     var usersDiv = document.querySelector('#waiting-room');
+
+    if (!usersDiv) {
+      return;
+    }
+
     (0,_utils__WEBPACK_IMPORTED_MODULE_1__.removeElementsChilds)(usersDiv);
     userlist.forEach(function (user) {
-      var listItem = (0,_components_UserListItem__WEBPACK_IMPORTED_MODULE_0__.default)(user);
+      var listItem = (0,_components_UserListItem__WEBPACK_IMPORTED_MODULE_0__.default)(user, loggedUsername, socket);
       usersDiv.appendChild(listItem);
     });
   });
@@ -163,8 +180,8 @@ __webpack_require__.r(__webpack_exports__);
  // Modules
 
 
-var socket = (0,_modules__WEBPACK_IMPORTED_MODULE_3__.initSocket)();
-(0,_modules__WEBPACK_IMPORTED_MODULE_3__.initEvents)(socket);
+var connection = (0,_modules__WEBPACK_IMPORTED_MODULE_3__.initConnection)();
+(0,_modules__WEBPACK_IMPORTED_MODULE_3__.initEvents)(connection);
 
 /***/ }),
 
@@ -173,7 +190,7 @@ var socket = (0,_modules__WEBPACK_IMPORTED_MODULE_3__.initSocket)();
   !*** ./src/modules/connection.js ***!
   \***********************************/
 /*! namespace exports */
-/*! export initSocket [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export initConnection [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -181,24 +198,31 @@ var socket = (0,_modules__WEBPACK_IMPORTED_MODULE_3__.initSocket)();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "initSocket": () => /* binding */ initSocket
+/* harmony export */   "initConnection": () => /* binding */ initConnection
 /* harmony export */ });
 /* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/wrapper.mjs");
 /* harmony import */ var _constants_socket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/socket */ "./src/constants/socket.js");
 
 
-var initSocket = function initSocket() {
-  var socket = {
-    connection: (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.default)(_constants_socket__WEBPACK_IMPORTED_MODULE_1__.SOCKET_URL)
+var initConnection = function initConnection() {
+  var connection = {
+    socket: (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.default)(_constants_socket__WEBPACK_IMPORTED_MODULE_1__.SOCKET_URL),
+    username: null
   };
 
-  socket.connect = function (name) {
+  connection.connect = function (name) {
     this.socket.emit('register', {
       name: name
     });
+    this.registerUser(name);
   };
 
-  return socket;
+  connection.resgisterUser = function (name) {
+    this.username = name;
+    localStorage.setItem('username', name);
+  };
+
+  return connection;
 };
 
 /***/ }),
@@ -220,10 +244,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../events */ "./src/events/index.js");
 
-var initEvents = function initEvents(socket) {
-  var connection = socket.connection;
-  (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(connection);
-  (0,_events__WEBPACK_IMPORTED_MODULE_0__.getUserlistEvent)(connection);
+var initEvents = function initEvents(connection) {
+  var socket = connection.socket,
+      username = connection.username;
+  (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(socket);
+  (0,_events__WEBPACK_IMPORTED_MODULE_0__.getUserlistEvent)(socket, username);
 };
 
 /***/ }),
@@ -233,8 +258,8 @@ var initEvents = function initEvents(socket) {
   !*** ./src/modules/index.js ***!
   \******************************/
 /*! namespace exports */
+/*! export initConnection [provided] [no usage info] [missing usage info prevents renaming] -> ./src/modules/connection.js .initConnection */
 /*! export initEvents [provided] [no usage info] [missing usage info prevents renaming] -> ./src/modules/events.js .initEvents */
-/*! export initSocket [provided] [no usage info] [missing usage info prevents renaming] -> ./src/modules/connection.js .initSocket */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.d, __webpack_require__.r, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -243,7 +268,7 @@ var initEvents = function initEvents(socket) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "initEvents": () => /* reexport safe */ _events__WEBPACK_IMPORTED_MODULE_0__.initEvents,
-/* harmony export */   "initSocket": () => /* reexport safe */ _connection__WEBPACK_IMPORTED_MODULE_1__.initSocket
+/* harmony export */   "initConnection": () => /* reexport safe */ _connection__WEBPACK_IMPORTED_MODULE_1__.initConnection
 /* harmony export */ });
 /* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events */ "./src/modules/events.js");
 /* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./connection */ "./src/modules/connection.js");

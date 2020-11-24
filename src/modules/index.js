@@ -1,2 +1,2 @@
 export { initEvents } from './events';
-export { initSocket } from './connection';
+export { initConnection } from './connection';

@@ -1,8 +1,8 @@
 import { enterLobbyEvent, getUserlistEvent } from '../events';
 
-export const initEvents = socket => {
-    const { connection } = socket;
+export const initEvents = connection => {
+    const { socket, username } = connection;
 
-    enterLobbyEvent(connection);
-    getUserlistEvent(connection);
+    enterLobbyEvent(socket);
+    getUserlistEvent(socket, username);
 };

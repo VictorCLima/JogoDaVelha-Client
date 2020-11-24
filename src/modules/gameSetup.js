@@ -1,54 +1,53 @@
+/* const square = document.getElementsByTagName('input');
 
-const square = document.getElementsByTagName('input'); 
+const restart = document.getElementById('restart');
 
-const restart = document.getElementById('restart'); 
-
-const label_player = document.getElementById('player'); 
+const label_player = document.getElementById('player');
 
 
-var player = '_'; 
-var winner = '_'; 
+var player = '_';
+var winner = '_';
 var finish;
 
 for(var i=0; i< 9; i++) {
 	square[i].addEventListener('click', (event) => {
 		if( (event.target.value=='_') && (winner =='_')) {
-			event.target.value=player; 
-			event.target.style.color='#bc5e00'; 
+			event.target.value=player;
+			event.target.style.color='#bc5e00';
 
-			changePlayer(); 
+			changePlayer();
 
-			winner = victory(); 
-			
+			winner = victory();
+
 		}
 	});
 }
 
 restart.addEventListener('click', (event) => {
 	for(var i=0;i<9;i++) {
-		square[i].value='_'; 
-		square[i].style.color='#F7FE2E'; 
+		square[i].value='_';
+		square[i].style.color='#F7FE2E';
 		square[i].style.backgroundColor='#F7FE2E';
 	}
 
-	winner = '_'; 
+	winner = '_';
 
-	drawPlayer(); 
+	drawPlayer();
 });
 
 var drawPlayer = () => {
 	if(Math.floor(Math.random() * 2)==0) {
-		player = "O"; 
-		label_player.innerText="O"; 
-		label_player.style.color='#ffffff'; 
+		player = "O";
+		label_player.innerText="O";
+		label_player.style.color='#ffffff';
 	}else{
 		w = "X";
-		label_player.innerText="X"; 
-		label_player.style.color='#000000'; 
+		label_player.innerText="X";
+		label_player.style.color='#000000';
 	}
 }
 
-drawPlayer(); 
+drawPlayer();
 
 
 var changePlayer = () => {
@@ -56,7 +55,7 @@ var changePlayer = () => {
 		player = 'O';
 		label_player.innerText='O';
 		label_player.style.color='#ffffff';
-		
+
 	}else{
 		player='X';
 		label_player.innerText='X';
@@ -120,7 +119,7 @@ var victory = () => {
 
 		return square[2].value;
 	}
-	
-								
+
+
     return '_';
-}
+} */
