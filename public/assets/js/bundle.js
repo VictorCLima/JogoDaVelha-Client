@@ -113,7 +113,7 @@ var SOCKET_URL = 'http://localhost:5000';
 /*! namespace exports */
 /*! export default [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -121,13 +121,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
+
+
 var enterLobbyEvent = function enterLobbyEvent(connection) {
   var userNameInput = document.querySelector('#username-input');
   var submitButton = document.querySelector('#register-button');
+  if (!userNameInput || !submitButton) return;
   submitButton.addEventListener('click', function () {
     var name = userNameInput.value;
     if (!name) return;
     connection.connect(name);
+    (0,_utils__WEBPACK_IMPORTED_MODULE_0__.push)('/lobby');
   });
 };
 
@@ -177,6 +182,7 @@ function getUserlistEvent(connection) {
 /*! namespace exports */
 /*! export enterLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/enterLobby.js .default */
 /*! export getUserlistEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getUserlist.js .default */
+/*! export loadUserEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/loadUser.js .default */
 /*! export receiveNotificationEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/receiveNotification.js .default */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.d, __webpack_require__.r, __webpack_require__.* */
@@ -187,14 +193,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "enterLobbyEvent": () => /* reexport safe */ _enterLobby__WEBPACK_IMPORTED_MODULE_0__.default,
 /* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_1__.default,
-/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_2__.default
+/* harmony export */   "loadUserEvent": () => /* reexport safe */ _loadUser__WEBPACK_IMPORTED_MODULE_2__.default,
+/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_3__.default
 /* harmony export */ });
 /* harmony import */ var _enterLobby__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enterLobby */ "./src/events/enterLobby.js");
 /* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
-/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
+/* harmony import */ var _loadUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./loadUser */ "./src/events/loadUser.js");
+/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
 
 
 
+
+
+/***/ }),
+
+/***/ "./src/events/loadUser.js":
+/*!********************************!*\
+  !*** ./src/events/loadUser.js ***!
+  \********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ loadUser
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
+
+function loadUser(connection) {
+  window.addEventListener('load', function () {
+    var username = localStorage.getItem('username');
+    if (!username) (0,_utils__WEBPACK_IMPORTED_MODULE_0__.push)('/');
+    connection.connect(username);
+  });
+}
 
 /***/ }),
 
@@ -314,8 +350,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "initEvents": () => /* binding */ initEvents
 /* harmony export */ });
 /* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../events */ "./src/events/index.js");
+/* harmony import */ var _events_loadUser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../events/loadUser */ "./src/events/loadUser.js");
+
 
 var initEvents = function initEvents(connection) {
+  (0,_events_loadUser__WEBPACK_IMPORTED_MODULE_1__.default)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.getUserlistEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.receiveNotificationEvent)(connection);
@@ -385,6 +424,7 @@ function createElement(elementName) {
   \****************************/
 /*! namespace exports */
 /*! export createElement [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/createElement.js .default */
+/*! export push [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/push.js .default */
 /*! export removeElementsChilds [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/removeElementsChilds.js .default */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.d, __webpack_require__.r, __webpack_require__.* */
@@ -394,12 +434,37 @@ function createElement(elementName) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createElement": () => /* reexport safe */ _createElement__WEBPACK_IMPORTED_MODULE_0__.default,
-/* harmony export */   "removeElementsChilds": () => /* reexport safe */ _removeElementsChilds__WEBPACK_IMPORTED_MODULE_1__.default
+/* harmony export */   "push": () => /* reexport safe */ _push__WEBPACK_IMPORTED_MODULE_1__.default,
+/* harmony export */   "removeElementsChilds": () => /* reexport safe */ _removeElementsChilds__WEBPACK_IMPORTED_MODULE_2__.default
 /* harmony export */ });
 /* harmony import */ var _createElement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createElement */ "./src/utils/createElement.js");
-/* harmony import */ var _removeElementsChilds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./removeElementsChilds */ "./src/utils/removeElementsChilds.js");
+/* harmony import */ var _push__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./push */ "./src/utils/push.js");
+/* harmony import */ var _removeElementsChilds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./removeElementsChilds */ "./src/utils/removeElementsChilds.js");
 
 
+
+
+/***/ }),
+
+/***/ "./src/utils/push.js":
+/*!***************************!*\
+  !*** ./src/utils/push.js ***!
+  \***************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ push
+/* harmony export */ });
+function push(href) {
+  if (window.location.pathname === href) return;
+  window.location.href = href;
+}
 
 /***/ }),
 
