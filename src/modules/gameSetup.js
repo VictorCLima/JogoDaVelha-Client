@@ -1,5 +1,5 @@
 import Board from '../components/gameBoard';
-import { isMyTurn, removeElementsChilds } from '../utils';
+import { haveIWon, isMyTurn, removeElementsChilds } from '../utils';
 
 const renderGameboard = (gameBoard, onClickSquare) => {
     const boardDiv = document.querySelector('.wrapper-board');
@@ -37,10 +37,19 @@ const onClickSquare = connection => (x, y) => {
     connection.userInfo.gameBoard.board = board;
     connection.userInfo.playerTurn = !playerTurn;
 
-    connection.socket.emit('newMove', {
-        name: connection.username,
-        gameBoard: connection.userInfo.gameBoard,
-    });
+    const iWon = haveIWon(board);
+    console.log(iWon);
+    if (iWon !== null)
+        connection.socket.emit('endgame', {
+            name: connection.username,
+            winner: iWon,
+            gameBoard: connection.userInfo.gameBoard,
+        });
+    else
+        connection.socket.emit('newMove', {
+            name: connection.username,
+            gameBoard: connection.userInfo.gameBoard,
+        });
 };
 
 export const setupGame = connection => {

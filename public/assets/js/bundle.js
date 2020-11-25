@@ -647,7 +647,13 @@ var onClickSquare = function onClickSquare(connection) {
     board[x][y] = playerType;
     connection.userInfo.gameBoard.board = board;
     connection.userInfo.playerTurn = !playerTurn;
-    connection.socket.emit('newMove', {
+    var iWon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.haveIWon)(board);
+    console.log(iWon);
+    if (iWon !== null) connection.socket.emit('endgame', {
+      name: connection.username,
+      winner: iWon,
+      gameBoard: connection.userInfo.gameBoard
+    });else connection.socket.emit('newMove', {
       name: connection.username,
       gameBoard: connection.userInfo.gameBoard
     });
@@ -721,12 +727,100 @@ function createElement(elementName) {
 
 /***/ }),
 
+/***/ "./src/utils/haveIWon.js":
+/*!*******************************!*\
+  !*** ./src/utils/haveIWon.js ***!
+  \*******************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ haveIWon
+/* harmony export */ });
+var checkWinnerOnRows = function checkWinnerOnRows(board) {
+  for (var i = 0; i < 3; i++) {
+    var thereIsAWinner = true;
+    var actualValue = board[i][0];
+
+    for (var j = 0; j < 3; j++) {
+      if (board[i][j] !== actualValue) thereIsAWinner = false;
+      actualValue = board[i][j];
+    }
+
+    if (thereIsAWinner) return actualValue;
+  }
+
+  return null;
+};
+
+var checkWinnerOnColumns = function checkWinnerOnColumns(board) {
+  for (var i = 0; i < 3; i++) {
+    var thereIsAWinner = true;
+    var actualValue = board[0][i];
+
+    for (var j = 0; j < 3; j++) {
+      if (board[j][i] !== actualValue) thereIsAWinner = false;
+      actualValue = board[j][i];
+    }
+
+    if (thereIsAWinner) return actualValue;
+  }
+
+  return null;
+};
+
+var checkWinnerOnDescendingDiagonal = function checkWinnerOnDescendingDiagonal(board) {
+  var thereIsAWinner = true;
+  var actualValue = board[0][0];
+
+  for (var i = 0; i < 3; i++) {
+    if (board[i][i] !== actualValue) thereIsAWinner = false;
+    actualValue = board[i][i];
+  }
+
+  if (thereIsAWinner) return actualValue;
+  return null;
+};
+
+var checkWinnerOnAscendingDiagonal = function checkWinnerOnAscendingDiagonal(board) {
+  var thereIsAWinner = true;
+  var actualValue = board[2][0];
+
+  for (var i = 0; i < 3; i++) {
+    if (board[2 - i][i] !== actualValue) thereIsAWinner = false;
+    actualValue = board[2 - i][i];
+  }
+
+  if (thereIsAWinner) return actualValue;
+  return null;
+};
+
+function haveIWon(board) {
+  var possibleWinner = checkWinnerOnRows(board);
+  if (possibleWinner !== null) return possibleWinner;
+  possibleWinner = checkWinnerOnColumns(board);
+  if (possibleWinner !== null) return possibleWinner;
+  possibleWinner = checkWinnerOnDescendingDiagonal(board);
+  if (possibleWinner !== null) return possibleWinner;
+  possibleWinner = checkWinnerOnAscendingDiagonal(board);
+  if (possibleWinner !== null) return possibleWinner;
+  return null;
+}
+
+/***/ }),
+
 /***/ "./src/utils/index.js":
 /*!****************************!*\
   !*** ./src/utils/index.js ***!
   \****************************/
 /*! namespace exports */
 /*! export createElement [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/createElement.js .default */
+/*! export haveIWon [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/haveIWon.js .default */
 /*! export isMyTurn [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/isMyTurn.js .default */
 /*! export push [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/push.js .default */
 /*! export removeElementsChilds [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/removeElementsChilds.js .default */
@@ -738,14 +832,17 @@ function createElement(elementName) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createElement": () => /* reexport safe */ _createElement__WEBPACK_IMPORTED_MODULE_0__.default,
-/* harmony export */   "isMyTurn": () => /* reexport safe */ _isMyTurn__WEBPACK_IMPORTED_MODULE_1__.default,
-/* harmony export */   "push": () => /* reexport safe */ _push__WEBPACK_IMPORTED_MODULE_2__.default,
-/* harmony export */   "removeElementsChilds": () => /* reexport safe */ _removeElementsChilds__WEBPACK_IMPORTED_MODULE_3__.default
+/* harmony export */   "haveIWon": () => /* reexport safe */ _haveIWon__WEBPACK_IMPORTED_MODULE_1__.default,
+/* harmony export */   "isMyTurn": () => /* reexport safe */ _isMyTurn__WEBPACK_IMPORTED_MODULE_2__.default,
+/* harmony export */   "push": () => /* reexport safe */ _push__WEBPACK_IMPORTED_MODULE_3__.default,
+/* harmony export */   "removeElementsChilds": () => /* reexport safe */ _removeElementsChilds__WEBPACK_IMPORTED_MODULE_4__.default
 /* harmony export */ });
 /* harmony import */ var _createElement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createElement */ "./src/utils/createElement.js");
-/* harmony import */ var _isMyTurn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./isMyTurn */ "./src/utils/isMyTurn.js");
-/* harmony import */ var _push__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./push */ "./src/utils/push.js");
-/* harmony import */ var _removeElementsChilds__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./removeElementsChilds */ "./src/utils/removeElementsChilds.js");
+/* harmony import */ var _haveIWon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./haveIWon */ "./src/utils/haveIWon.js");
+/* harmony import */ var _isMyTurn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./isMyTurn */ "./src/utils/isMyTurn.js");
+/* harmony import */ var _push__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./push */ "./src/utils/push.js");
+/* harmony import */ var _removeElementsChilds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./removeElementsChilds */ "./src/utils/removeElementsChilds.js");
+
 
 
 
