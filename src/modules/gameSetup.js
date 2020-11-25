@@ -1,18 +1,5 @@
-import Board from '../components/gameBoard';
-
-import { haveIWon, isMyTurn, removeElementsChilds, push } from '../utils';
-
-const renderGameboard = (gameBoard, onClickSquare) => {
-    const boardDiv = document.querySelector('.wrapper-board');
-
-    if (!boardDiv) return;
-
-    removeElementsChilds(boardDiv);
-
-    const boardElement = Board(gameBoard.board, onClickSquare);
-
-    boardDiv.appendChild(boardElement);
-};
+import { renderGameboard } from '../actions';
+import { haveIWon, isMyTurn } from '../utils';
 
 const showMyTurn = userInfo => {
     const myTurnDiv = document.querySelector('.my-turn-container');
@@ -39,15 +26,13 @@ const onClickSquare = connection => (x, y) => {
     connection.userInfo.playerTurn = !playerTurn;
 
     const iWon = haveIWon(board);
-    console.log(iWon);
+
     if (iWon !== null) {
         connection.socket.emit('endgame', {
             name: connection.username,
             winner: iWon,
             gameBoard: connection.userInfo.gameBoard,
         });
-        alert(`${connection.username} ganhou. Você retornará para o lobby`);
-        push('/lobby');
     } else
         connection.socket.emit('newMove', {
             name: connection.username,

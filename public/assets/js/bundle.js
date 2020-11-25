@@ -28,6 +28,102 @@ module.exports = _defineProperty;
 
 /***/ }),
 
+/***/ "./src/actions/index.js":
+/*!******************************!*\
+  !*** ./src/actions/index.js ***!
+  \******************************/
+/*! namespace exports */
+/*! export renderGameboard [provided] [no usage info] [missing usage info prevents renaming] -> ./src/actions/renderGameboard.js .default */
+/*! export showVictory [provided] [no usage info] [missing usage info prevents renaming] -> ./src/actions/showVictory.js .default */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.d, __webpack_require__.r, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderGameboard": () => /* reexport safe */ _renderGameboard__WEBPACK_IMPORTED_MODULE_0__.default,
+/* harmony export */   "showVictory": () => /* reexport safe */ _showVictory__WEBPACK_IMPORTED_MODULE_1__.default
+/* harmony export */ });
+/* harmony import */ var _renderGameboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./renderGameboard */ "./src/actions/renderGameboard.js");
+/* harmony import */ var _showVictory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./showVictory */ "./src/actions/showVictory.js");
+
+
+
+/***/ }),
+
+/***/ "./src/actions/renderGameboard.js":
+/*!****************************************!*\
+  !*** ./src/actions/renderGameboard.js ***!
+  \****************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _components_gameBoard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/gameBoard */ "./src/components/gameBoard/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
+
+
+
+var renderGameboard = function renderGameboard(gameBoard, onClickSquare) {
+  var boardDiv = document.querySelector('.wrapper-board');
+  if (!boardDiv) return;
+  (0,_utils__WEBPACK_IMPORTED_MODULE_1__.removeElementsChilds)(boardDiv);
+  var boardElement = (0,_components_gameBoard__WEBPACK_IMPORTED_MODULE_0__.default)(gameBoard.board, onClickSquare);
+  boardDiv.appendChild(boardElement);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderGameboard);
+
+/***/ }),
+
+/***/ "./src/actions/showVictory.js":
+/*!************************************!*\
+  !*** ./src/actions/showVictory.js ***!
+  \************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _components_gameResults__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/gameResults */ "./src/components/gameResults/index.js");
+
+
+var renderVictoryResult = function renderVictoryResult(container) {
+  var result = (0,_components_gameResults__WEBPACK_IMPORTED_MODULE_0__.default)('Você venceu!', 'victory');
+  container.appendChild(result);
+};
+
+var renderDefeatResult = function renderDefeatResult(container) {
+  var result = (0,_components_gameResults__WEBPACK_IMPORTED_MODULE_0__.default)('Você perdeu...', 'defeat');
+  container.appendChild(result);
+};
+
+var showVictory = function showVictory(myType, winner) {
+  var resultsDiv = document.querySelector('#game-results');
+  if (!resultsDiv) return;
+  var myTurnContainer = document.querySelector('.my-turn-container');
+  if (myTurnContainer) myTurnContainer.style.display = 'none';
+  if (myType === winner) renderVictoryResult(resultsDiv);else renderDefeatResult(resultsDiv);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showVictory);
+
+/***/ }),
+
 /***/ "./src/components/InviteModal/index.js":
 /*!*********************************************!*\
   !*** ./src/components/InviteModal/index.js ***!
@@ -217,6 +313,44 @@ function Board(gameBoard, onClick) {
 
 /***/ }),
 
+/***/ "./src/components/gameResults/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/gameResults/index.js ***!
+  \*********************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
+
+
+var GameResult = function GameResult(message, titleClass) {
+  var container = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('div', {
+    className: 'result-container'
+  }, [(0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('h2', {
+    className: titleClass,
+    innerText: message
+  }), (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('button', {
+    className: 'back-button',
+    onclick: function onclick() {
+      return (0,_utils__WEBPACK_IMPORTED_MODULE_0__.push)('/lobby');
+    },
+    innerText: 'Voltar para o Lobby'
+  })]);
+  return container;
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GameResult);
+
+/***/ }),
+
 /***/ "./src/constants/socket.js":
 /*!*********************************!*\
   !*** ./src/constants/socket.js ***!
@@ -233,6 +367,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SOCKET_URL": () => /* binding */ SOCKET_URL
 /* harmony export */ });
 var SOCKET_URL = 'http://localhost:5000';
+
+/***/ }),
+
+/***/ "./src/events/endgame.js":
+/*!*******************************!*\
+  !*** ./src/events/endgame.js ***!
+  \*******************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ endgame
+/* harmony export */ });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
+
+function endgame(connection) {
+  connection.socket.on('endgame', function (endgameInfo) {
+    var playerType = connection.userInfo.playerType;
+    connection.userInfo = endgameInfo.user;
+    (0,_actions__WEBPACK_IMPORTED_MODULE_0__.renderGameboard)(endgameInfo.gameBoard, function () {
+      return undefined;
+    });
+    (0,_actions__WEBPACK_IMPORTED_MODULE_0__.showVictory)(playerType, endgameInfo.winner);
+  });
+}
 
 /***/ }),
 
@@ -413,6 +577,7 @@ function getUserlistEvent(connection) {
   !*** ./src/events/index.js ***!
   \*****************************/
 /*! namespace exports */
+/*! export endgameEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/endgame.js .default */
 /*! export enterLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/enterLobby.js .default */
 /*! export exitLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/exitLobby.js .default */
 /*! export getMoveEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getMove.js .default */
@@ -428,20 +593,23 @@ function getUserlistEvent(connection) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "enterLobbyEvent": () => /* reexport safe */ _enterLobby__WEBPACK_IMPORTED_MODULE_0__.default,
-/* harmony export */   "exitLobbyEvent": () => /* reexport safe */ _exitLobby__WEBPACK_IMPORTED_MODULE_1__.default,
-/* harmony export */   "getMoveEvent": () => /* reexport safe */ _getMove__WEBPACK_IMPORTED_MODULE_2__.default,
-/* harmony export */   "getUserInfoEvent": () => /* reexport safe */ _getUserInfo__WEBPACK_IMPORTED_MODULE_3__.default,
-/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_4__.default,
-/* harmony export */   "loadUserEvent": () => /* reexport safe */ _loadUser__WEBPACK_IMPORTED_MODULE_5__.default,
-/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_6__.default
+/* harmony export */   "endgameEvent": () => /* reexport safe */ _endgame__WEBPACK_IMPORTED_MODULE_1__.default,
+/* harmony export */   "exitLobbyEvent": () => /* reexport safe */ _exitLobby__WEBPACK_IMPORTED_MODULE_2__.default,
+/* harmony export */   "getMoveEvent": () => /* reexport safe */ _getMove__WEBPACK_IMPORTED_MODULE_3__.default,
+/* harmony export */   "getUserInfoEvent": () => /* reexport safe */ _getUserInfo__WEBPACK_IMPORTED_MODULE_4__.default,
+/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_5__.default,
+/* harmony export */   "loadUserEvent": () => /* reexport safe */ _loadUser__WEBPACK_IMPORTED_MODULE_6__.default,
+/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_7__.default
 /* harmony export */ });
 /* harmony import */ var _enterLobby__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enterLobby */ "./src/events/enterLobby.js");
-/* harmony import */ var _exitLobby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exitLobby */ "./src/events/exitLobby.js");
-/* harmony import */ var _getMove__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getMove */ "./src/events/getMove.js");
-/* harmony import */ var _getUserInfo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getUserInfo */ "./src/events/getUserInfo.js");
-/* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
-/* harmony import */ var _loadUser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./loadUser */ "./src/events/loadUser.js");
-/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
+/* harmony import */ var _endgame__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./endgame */ "./src/events/endgame.js");
+/* harmony import */ var _exitLobby__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exitLobby */ "./src/events/exitLobby.js");
+/* harmony import */ var _getMove__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getMove */ "./src/events/getMove.js");
+/* harmony import */ var _getUserInfo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getUserInfo */ "./src/events/getUserInfo.js");
+/* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
+/* harmony import */ var _loadUser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./loadUser */ "./src/events/loadUser.js");
+/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
+
 
 
 
@@ -616,6 +784,7 @@ var initEvents = function initEvents(connection) {
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.receiveNotificationEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.exitLobbyEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.getMoveEvent)(connection);
+  (0,_events__WEBPACK_IMPORTED_MODULE_0__.endgameEvent)(connection);
 };
 
 /***/ }),
@@ -635,18 +804,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "setupGame": () => /* binding */ setupGame
 /* harmony export */ });
-/* harmony import */ var _components_gameBoard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/gameBoard */ "./src/components/gameBoard/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./src/actions/index.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
 
 
-
-var renderGameboard = function renderGameboard(gameBoard, onClickSquare) {
-  var boardDiv = document.querySelector('.wrapper-board');
-  if (!boardDiv) return;
-  (0,_utils__WEBPACK_IMPORTED_MODULE_1__.removeElementsChilds)(boardDiv);
-  var boardElement = (0,_components_gameBoard__WEBPACK_IMPORTED_MODULE_0__.default)(gameBoard.board, onClickSquare);
-  boardDiv.appendChild(boardElement);
-};
 
 var showMyTurn = function showMyTurn(userInfo) {
   var myTurnDiv = document.querySelector('.my-turn-container');
@@ -665,7 +826,6 @@ var onClickSquare = function onClickSquare(connection) {
     connection.userInfo.gameBoard.board = board;
     connection.userInfo.playerTurn = !playerTurn;
     var iWon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.haveIWon)(board);
-    console.log(iWon);
 
     if (iWon !== null) {
       connection.socket.emit('endgame', {
@@ -673,8 +833,6 @@ var onClickSquare = function onClickSquare(connection) {
         winner: iWon,
         gameBoard: connection.userInfo.gameBoard
       });
-      alert("".concat(connection.username, " ganhou. Voc\xEA retornar\xE1 para o lobby"));
-      (0,_utils__WEBPACK_IMPORTED_MODULE_1__.push)('/lobby');
     } else connection.socket.emit('newMove', {
       name: connection.username,
       gameBoard: connection.userInfo.gameBoard
@@ -683,7 +841,7 @@ var onClickSquare = function onClickSquare(connection) {
 };
 
 var setupGame = function setupGame(connection) {
-  renderGameboard(connection.userInfo.gameBoard, onClickSquare(connection));
+  (0,_actions__WEBPACK_IMPORTED_MODULE_0__.renderGameboard)(connection.userInfo.gameBoard, onClickSquare(connection));
   showMyTurn(connection.userInfo);
 };
 
@@ -1357,7 +1515,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "main {\n  width: 100%;\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n\n.my-turn-container {\n    text-align: center;\n    visibility: hidden;\n\n    margin-bottom: 16px;\n\n    color: rgb(226, 5, 226);\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.wrapper-board .row {\n    display: flex;\n}\n\n.wrapper-board .square {\n    background-color:#F7FE2E;\n\n\twidth: 150px;\n\theight: 150px;\n    margin: 4px;\n\n\tfont-size: 92px;\n    color: #3d4550;\n\n    border-radius: 25px;\n    border: none;\n\n    cursor: pointer;\n}\n\n\n", "",{"version":3,"sources":["webpack://./src/assets/css/gameStyle.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;;EAEZ,aAAa;EACb,sBAAsB;EACtB,uBAAuB;EACvB,mBAAmB;AACrB;;AAEA;IACI,kBAAkB;IAClB,kBAAkB;;IAElB,mBAAmB;;IAEnB,uBAAuB;AAC3B;AACA;IACI,eAAe;IACf,gBAAgB;AACpB;;AAEA;IACI,mBAAmB;AACvB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,wBAAwB;;CAE3B,YAAY;CACZ,aAAa;IACV,WAAW;;CAEd,eAAe;IACZ,cAAc;;IAEd,mBAAmB;IACnB,YAAY;;IAEZ,eAAe;AACnB","sourcesContent":["main {\n  width: 100%;\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n\n.my-turn-container {\n    text-align: center;\n    visibility: hidden;\n\n    margin-bottom: 16px;\n\n    color: rgb(226, 5, 226);\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.wrapper-board .row {\n    display: flex;\n}\n\n.wrapper-board .square {\n    background-color:#F7FE2E;\n\n\twidth: 150px;\n\theight: 150px;\n    margin: 4px;\n\n\tfont-size: 92px;\n    color: #3d4550;\n\n    border-radius: 25px;\n    border: none;\n\n    cursor: pointer;\n}\n\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "main {\n  width: 100%;\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n\n.my-turn-container {\n    text-align: center;\n    visibility: hidden;\n\n    margin-bottom: 16px;\n\n    color: rgb(226, 5, 226);\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.wrapper-board .row {\n    display: flex;\n}\n\n.wrapper-board .square {\n    background-color:#F7FE2E;\n\n\twidth: 150px;\n\theight: 150px;\n    margin: 4px;\n\n\tfont-size: 92px;\n    color: #3d4550;\n\n    border-radius: 25px;\n    border: none;\n\n    cursor: pointer;\n\n    transition: all .2s;\n}\n\n.wrapper-board .square:hover{\n    background-color:#c2c724;\n}\n\n#game-results {\n    width: 100%;\n}\n\n#game-results .result-container {\n    width: 100%;\n\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n\n    margin: 16px 0;\n}\n\n#game-results .result-container h2{\n    font-weight: bold;\n\n    text-align: center;\n\n    margin-bottom: 16px;\n}\n\n#game-results .result-container h2.victory {\n    color: chartreuse;\n}\n\n#game-results .result-container h2.defeat {\n    color: crimson;\n}\n\n#game-results .result-container .back-button {\n    border: none;\n    padding: 8px 16px;\n\n    background-color: rgb(226, 5, 226);\n    color: white;\n\n    border-radius: 8px;\n\n    transition: all .2s;\n}\n\n#game-results .result-container .back-button:hover {\n    background-color: rgb(187, 5, 187);\n}\n", "",{"version":3,"sources":["webpack://./src/assets/css/gameStyle.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;;EAEZ,aAAa;EACb,sBAAsB;EACtB,uBAAuB;EACvB,mBAAmB;AACrB;;AAEA;IACI,kBAAkB;IAClB,kBAAkB;;IAElB,mBAAmB;;IAEnB,uBAAuB;AAC3B;AACA;IACI,eAAe;IACf,gBAAgB;AACpB;;AAEA;IACI,mBAAmB;AACvB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,wBAAwB;;CAE3B,YAAY;CACZ,aAAa;IACV,WAAW;;CAEd,eAAe;IACZ,cAAc;;IAEd,mBAAmB;IACnB,YAAY;;IAEZ,eAAe;;IAEf,mBAAmB;AACvB;;AAEA;IACI,wBAAwB;AAC5B;;AAEA;IACI,WAAW;AACf;;AAEA;IACI,WAAW;;IAEX,aAAa;IACb,sBAAsB;IACtB,mBAAmB;;IAEnB,cAAc;AAClB;;AAEA;IACI,iBAAiB;;IAEjB,kBAAkB;;IAElB,mBAAmB;AACvB;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,cAAc;AAClB;;AAEA;IACI,YAAY;IACZ,iBAAiB;;IAEjB,kCAAkC;IAClC,YAAY;;IAEZ,kBAAkB;;IAElB,mBAAmB;AACvB;;AAEA;IACI,kCAAkC;AACtC","sourcesContent":["main {\n  width: 100%;\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n\n.my-turn-container {\n    text-align: center;\n    visibility: hidden;\n\n    margin-bottom: 16px;\n\n    color: rgb(226, 5, 226);\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.wrapper-board .row {\n    display: flex;\n}\n\n.wrapper-board .square {\n    background-color:#F7FE2E;\n\n\twidth: 150px;\n\theight: 150px;\n    margin: 4px;\n\n\tfont-size: 92px;\n    color: #3d4550;\n\n    border-radius: 25px;\n    border: none;\n\n    cursor: pointer;\n\n    transition: all .2s;\n}\n\n.wrapper-board .square:hover{\n    background-color:#c2c724;\n}\n\n#game-results {\n    width: 100%;\n}\n\n#game-results .result-container {\n    width: 100%;\n\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n\n    margin: 16px 0;\n}\n\n#game-results .result-container h2{\n    font-weight: bold;\n\n    text-align: center;\n\n    margin-bottom: 16px;\n}\n\n#game-results .result-container h2.victory {\n    color: chartreuse;\n}\n\n#game-results .result-container h2.defeat {\n    color: crimson;\n}\n\n#game-results .result-container .back-button {\n    border: none;\n    padding: 8px 16px;\n\n    background-color: rgb(226, 5, 226);\n    color: white;\n\n    border-radius: 8px;\n\n    transition: all .2s;\n}\n\n#game-results .result-container .back-button:hover {\n    background-color: rgb(187, 5, 187);\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
