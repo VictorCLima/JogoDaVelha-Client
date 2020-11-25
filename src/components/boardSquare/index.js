@@ -7,6 +7,7 @@ export default function BoardSquare(item, onClick) {
     const boardSquare = createElement('button', {
         innerText,
         onclick: onClick,
+        className: 'square',
     });
 
     return boardSquare;

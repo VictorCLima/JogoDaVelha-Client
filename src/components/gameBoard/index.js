@@ -5,7 +5,9 @@ export default function Board(gameBoard, onClick) {
     const children = gameBoard.map((row, rowIndex) =>
         createElement(
             'div',
-            {},
+            {
+                className: 'row',
+            },
             row.map((item, columnIndex) =>
                 BoardSquare(item, () => {
                     onClick(rowIndex, columnIndex);

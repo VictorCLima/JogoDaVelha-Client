@@ -1,77 +1,48 @@
-.wrapper-contend {
+main {
   width: 100%;
   height: 100%;
+
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
-
-.wrapper-board button {
-	background-color:#F7FE2E;
-	font-size: 6vw;
-	width: 10vw;
-	height:10vw;
-	margin: 4px;
-	color: #3d4550;
-    border-radius: 25px;
-    border: none;
-
-}
- .wrapper-contend .wrapper-board {
-    display: inline-block;
-    padding-left: 460px;
-    padding-top: 50px;
-
- }
-
-.wrapper-btn {
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: flex-end;
-
+  justify-content: center;
+  align-items: center;
 }
 
 .my-turn-container {
-    visibility: hidden;
-}
-
-.my-turn-container.visible {
-    visibility: visible;
-}
-
-.my-turn-container  {
     text-align: center;
-    padding-top: 40px;
+    visibility: hidden;
 
+    margin-bottom: 16px;
+
+    color: rgb(226, 5, 226);
 }
 .my-turn-container p {
     font-size: 40px;
     font-weight: 800;
 }
 
-#notification {
-    font-size: 20px;
-    font-weight: 400;
-    padding-bottom: 200px;
+.my-turn-container.visible {
+    visibility: visible;
 }
 
-#notification button {
-    color:  #FFF;
-    margin: 10px;
-    padding: 10px;
-    background-color: #2c343e;
-    border-radius: 45px;
-    text-transform: uppercase;
-    font-weight: 500;
+.wrapper-board .row {
+    display: flex;
+}
+
+.wrapper-board .square {
+    background-color:#F7FE2E;
+
+	width: 150px;
+	height: 150px;
+    margin: 4px;
+
+	font-size: 92px;
+    color: #3d4550;
+
+    border-radius: 25px;
     border: none;
+
+    cursor: pointer;
 }
-
-#notification  button:hover {
-    background-color: #3c444d;
-  }
-
 
 

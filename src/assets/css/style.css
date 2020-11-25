@@ -1,31 +1,3 @@
-.wrapper-content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-
- .wrapper-content .wrapper-board {
-    display: inline-block;
-    padding-left: 280px;
-    padding-top: 90px;
-
- }
-
-.wrapper-btn {
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-end;
-
-}
-
 .btn-game {
   max-height: 100px;
   max-width: 200px;
@@ -52,6 +24,7 @@
 .btn-game:hover {
   background: #363f4a;
 }
+
 a {
   color: #00B7FF;
 }
