@@ -91,6 +91,93 @@ var UserListItem = function UserListItem(user, loggedUsername, socket) {
 
 /***/ }),
 
+/***/ "./src/components/boardSquare/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/boardSquare/index.js ***!
+  \*********************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ BoardSquare
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
+/* harmony import */ var _utils_getChildrenStyle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/getChildrenStyle */ "./src/components/boardSquare/utils/getChildrenStyle.js");
+
+
+function BoardSquare(item, onClick) {
+  var innerText = (0,_utils_getChildrenStyle__WEBPACK_IMPORTED_MODULE_1__.getChildrenStyle)(item);
+  console.log(item, (0,_utils_getChildrenStyle__WEBPACK_IMPORTED_MODULE_1__.getChildrenStyle)(item));
+  var boardSquare = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('button', {
+    innerText: innerText,
+    onclick: onClick
+  });
+  return boardSquare;
+}
+
+/***/ }),
+
+/***/ "./src/components/boardSquare/utils/getChildrenStyle.js":
+/*!**************************************************************!*\
+  !*** ./src/components/boardSquare/utils/getChildrenStyle.js ***!
+  \**************************************************************/
+/*! namespace exports */
+/*! export getChildrenStyle [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getChildrenStyle": () => /* binding */ getChildrenStyle
+/* harmony export */ });
+var getChildrenStyle = function getChildrenStyle(item) {
+  if (item === null) return '';
+  if (item === 1) return '0';
+  return 'X';
+};
+
+/***/ }),
+
+/***/ "./src/components/gameBoard/index.js":
+/*!*******************************************!*\
+  !*** ./src/components/gameBoard/index.js ***!
+  \*******************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ Board
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils */ "./src/utils/index.js");
+/* harmony import */ var _boardSquare__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../boardSquare */ "./src/components/boardSquare/index.js");
+
+
+function Board(gameBoard, onClick) {
+  var children = gameBoard.map(function (row, rowIndex) {
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('div', {}, row.map(function (item, columnIndex) {
+      return (0,_boardSquare__WEBPACK_IMPORTED_MODULE_1__.default)(item, function () {
+        onClick(rowIndex, columnIndex);
+      });
+    }));
+  });
+  var board = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('div', {}, children);
+  return board;
+}
+
+/***/ }),
+
 /***/ "./src/constants/socket.js":
 /*!*********************************!*\
   !*** ./src/constants/socket.js ***!
@@ -187,11 +274,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ getUserInfo
 /* harmony export */ });
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
+/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules */ "./src/modules/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
+
 
 function getUserInfo(connection) {
   connection.socket.on('user', function (userInfo) {
-    if (userInfo.inGame) (0,_utils__WEBPACK_IMPORTED_MODULE_0__.push)('/game');else (0,_utils__WEBPACK_IMPORTED_MODULE_0__.push)('/lobby');
+    if (userInfo.inGame) {
+      (0,_utils__WEBPACK_IMPORTED_MODULE_1__.push)('/game');
+      (0,_modules__WEBPACK_IMPORTED_MODULE_0__.setupGame)(userInfo, connection);
+    } else (0,_utils__WEBPACK_IMPORTED_MODULE_1__.push)('/lobby');
   });
 }
 
@@ -435,6 +527,66 @@ var initEvents = function initEvents(connection) {
 
 /***/ }),
 
+/***/ "./src/modules/gameSetup.js":
+/*!**********************************!*\
+  !*** ./src/modules/gameSetup.js ***!
+  \**********************************/
+/*! namespace exports */
+/*! export setupGame [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "setupGame": () => /* binding */ setupGame
+/* harmony export */ });
+/* harmony import */ var _components_gameBoard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/gameBoard */ "./src/components/gameBoard/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
+
+
+
+var renderGameboard = function renderGameboard(gameBoard, onClickSquare) {
+  var boardDiv = document.querySelector('.wrapper-board');
+  if (!boardDiv) return;
+  (0,_utils__WEBPACK_IMPORTED_MODULE_1__.removeElementsChilds)(boardDiv);
+  var boardElement = (0,_components_gameBoard__WEBPACK_IMPORTED_MODULE_0__.default)(gameBoard.board, onClickSquare);
+  boardDiv.appendChild(boardElement);
+};
+
+var showMyTurn = function showMyTurn(userInfo) {
+  var myTurnDiv = document.querySelector('.my-turn-container');
+  if (!myTurnDiv) return;
+  if ((0,_utils__WEBPACK_IMPORTED_MODULE_1__.isMyTurn)(userInfo.playerTurn, userInfo.playerType)) myTurnDiv.classList.add('visible');else myTurnDiv.classList.remove('visible');
+};
+
+var onClickSquare = function onClickSquare(userInfo, connection) {
+  return function (x, y) {
+    var board = userInfo.gameBoard.board,
+        playerTurn = userInfo.playerTurn,
+        playerType = userInfo.playerType;
+    if (!(0,_utils__WEBPACK_IMPORTED_MODULE_1__.isMyTurn)(playerTurn, playerType)) return;
+    board[x][y] = playerType;
+    userInfo.gameBoard.board = board;
+    userInfo.playerTurn = !playerTurn;
+    connection.socket.emit('newMove', {
+      name: connection.username,
+      gameBoard: userInfo.gameBoard
+    });
+    renderGameboard(userInfo.gameBoard, onClickSquare(userInfo, connection));
+    showMyTurn(userInfo);
+  };
+};
+
+var setupGame = function setupGame(userInfo, connection) {
+  console.log(userInfo);
+  renderGameboard(userInfo.gameBoard, onClickSquare(userInfo, connection));
+  showMyTurn(userInfo);
+};
+
+/***/ }),
+
 /***/ "./src/modules/index.js":
 /*!******************************!*\
   !*** ./src/modules/index.js ***!
@@ -442,6 +594,7 @@ var initEvents = function initEvents(connection) {
 /*! namespace exports */
 /*! export initConnection [provided] [no usage info] [missing usage info prevents renaming] -> ./src/modules/connection.js .initConnection */
 /*! export initEvents [provided] [no usage info] [missing usage info prevents renaming] -> ./src/modules/events.js .initEvents */
+/*! export setupGame [provided] [no usage info] [missing usage info prevents renaming] -> ./src/modules/gameSetup.js .setupGame */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.d, __webpack_require__.r, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -450,10 +603,13 @@ var initEvents = function initEvents(connection) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "initEvents": () => /* reexport safe */ _events__WEBPACK_IMPORTED_MODULE_0__.initEvents,
-/* harmony export */   "initConnection": () => /* reexport safe */ _connection__WEBPACK_IMPORTED_MODULE_1__.initConnection
+/* harmony export */   "setupGame": () => /* reexport safe */ _gameSetup__WEBPACK_IMPORTED_MODULE_1__.setupGame,
+/* harmony export */   "initConnection": () => /* reexport safe */ _connection__WEBPACK_IMPORTED_MODULE_2__.initConnection
 /* harmony export */ });
 /* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events */ "./src/modules/events.js");
-/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./connection */ "./src/modules/connection.js");
+/* harmony import */ var _gameSetup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gameSetup */ "./src/modules/gameSetup.js");
+/* harmony import */ var _connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./connection */ "./src/modules/connection.js");
+
 
 
 
@@ -497,6 +653,7 @@ function createElement(elementName) {
   \****************************/
 /*! namespace exports */
 /*! export createElement [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/createElement.js .default */
+/*! export isMyTurn [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/isMyTurn.js .default */
 /*! export push [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/push.js .default */
 /*! export removeElementsChilds [provided] [no usage info] [missing usage info prevents renaming] -> ./src/utils/removeElementsChilds.js .default */
 /*! other exports [not provided] [no usage info] */
@@ -507,15 +664,39 @@ function createElement(elementName) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createElement": () => /* reexport safe */ _createElement__WEBPACK_IMPORTED_MODULE_0__.default,
-/* harmony export */   "push": () => /* reexport safe */ _push__WEBPACK_IMPORTED_MODULE_1__.default,
-/* harmony export */   "removeElementsChilds": () => /* reexport safe */ _removeElementsChilds__WEBPACK_IMPORTED_MODULE_2__.default
+/* harmony export */   "isMyTurn": () => /* reexport safe */ _isMyTurn__WEBPACK_IMPORTED_MODULE_1__.default,
+/* harmony export */   "push": () => /* reexport safe */ _push__WEBPACK_IMPORTED_MODULE_2__.default,
+/* harmony export */   "removeElementsChilds": () => /* reexport safe */ _removeElementsChilds__WEBPACK_IMPORTED_MODULE_3__.default
 /* harmony export */ });
 /* harmony import */ var _createElement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createElement */ "./src/utils/createElement.js");
-/* harmony import */ var _push__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./push */ "./src/utils/push.js");
-/* harmony import */ var _removeElementsChilds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./removeElementsChilds */ "./src/utils/removeElementsChilds.js");
+/* harmony import */ var _isMyTurn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./isMyTurn */ "./src/utils/isMyTurn.js");
+/* harmony import */ var _push__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./push */ "./src/utils/push.js");
+/* harmony import */ var _removeElementsChilds__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./removeElementsChilds */ "./src/utils/removeElementsChilds.js");
 
 
 
+
+
+/***/ }),
+
+/***/ "./src/utils/isMyTurn.js":
+/*!*******************************!*\
+  !*** ./src/utils/isMyTurn.js ***!
+  \*******************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ isMyTurn
+/* harmony export */ });
+function isMyTurn(turn, type) {
+  return turn === Boolean(type);
+}
 
 /***/ }),
 
@@ -982,7 +1163,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board input {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 0;\n\tcolor: #F7FE2E;\n    border-radius: 25px;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n#username-input {\n    padding: 8px;\n\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n  background: #2c343e;\n  border: 5px solid #2c343e;\n  border-radius: 45px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n  font-size: 19px;\n  font-weight: 700;\n  margin: 13px auto;\n  outline: none;\n  padding: 11px 30px;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding-left: 10px;\n  font-size: 16px;\n  text-decoration: underline;\n}\n\n.room .wrapper-button  button{\n  display: flex;\n  justify-content: center;\n  align-items: baseline;\n\n}\n", "",{"version":3,"sources":["webpack://./src/assets/css/gameStyle.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,iBAAiB;EACjB,8BAA8B;AAChC;;AAEA;CACC,wBAAwB;CACxB,cAAc;CACd,WAAW;CACX,WAAW;CACX,SAAS;CACT,cAAc;IACX,mBAAmB;;AAEvB;CACC;IACG,qBAAqB;IACrB,mBAAmB;IACnB,iBAAiB;;CAEpB;;AAED;EACE,WAAW;EACX,gBAAgB;EAChB,aAAa;EACb,mBAAmB;EACnB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;IACI,YAAY;;IAEZ,WAAW;IACX,6BAA6B;IAC7B,yBAAyB;IACzB,kBAAkB;AACtB;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;EAChB,mBAAmB;EACnB,yBAAyB;EACzB,mBAAmB;EACnB,WAAW;EACX,eAAe;EACf,cAAc;EACd,eAAe;EACf,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,yBAAyB;EACzB,aAAa;EACb,oBAAoB;;AAEtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,UAAU;EACV,yBAAyB;;EAEzB,aAAa;EACb,sBAAsB;EACtB,uBAAuB;EACvB,YAAY;EACZ,sBAAsB;AACxB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,qBAAqB;AACvB;;AAEA;EACE,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,iCAAiC;EACjC,mBAAmB;EACnB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,eAAe;EACf,iBAAiB;EACjB,gBAAgB;EAChB,kBAAkB;EAClB,mBAAmB;;EAEnB,eAAe;EACf,eAAe;AACjB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,0BAA0B;AAC5B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,qBAAqB;;AAEvB","sourcesContent":[".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board input {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 0;\n\tcolor: #F7FE2E;\n    border-radius: 25px;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n#username-input {\n    padding: 8px;\n\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n  background: #2c343e;\n  border: 5px solid #2c343e;\n  border-radius: 45px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n  font-size: 19px;\n  font-weight: 700;\n  margin: 13px auto;\n  outline: none;\n  padding: 11px 30px;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding-left: 10px;\n  font-size: 16px;\n  text-decoration: underline;\n}\n\n.room .wrapper-button  button{\n  display: flex;\n  justify-content: center;\n  align-items: baseline;\n\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board button {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 4px;\n\tcolor: #3d4550;\n    border-radius: 25px;\n    border: none;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n#username-input {\n    padding: 8px;\n\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n  background: #2c343e;\n  border: 5px solid #2c343e;\n  border-radius: 45px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n  font-size: 19px;\n  font-weight: 700;\n  margin: 13px auto;\n  outline: none;\n  padding: 11px 30px;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding-left: 10px;\n  font-size: 16px;\n  text-decoration: underline;\n}\n\n.room .wrapper-button  button{\n  display: flex;\n  justify-content: center;\n  align-items: baseline;\n\n}\n\n.my-turn-container {\n    visibility: hidden;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n", "",{"version":3,"sources":["webpack://./src/assets/css/gameStyle.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,iBAAiB;EACjB,8BAA8B;AAChC;;AAEA;CACC,wBAAwB;CACxB,cAAc;CACd,WAAW;CACX,WAAW;CACX,WAAW;CACX,cAAc;IACX,mBAAmB;IACnB,YAAY;;AAEhB;CACC;IACG,qBAAqB;IACrB,mBAAmB;IACnB,iBAAiB;;CAEpB;;AAED;EACE,WAAW;EACX,gBAAgB;EAChB,aAAa;EACb,mBAAmB;EACnB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;IACI,YAAY;;IAEZ,WAAW;IACX,6BAA6B;IAC7B,yBAAyB;IACzB,kBAAkB;AACtB;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;EAChB,mBAAmB;EACnB,yBAAyB;EACzB,mBAAmB;EACnB,WAAW;EACX,eAAe;EACf,cAAc;EACd,eAAe;EACf,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,yBAAyB;EACzB,aAAa;EACb,oBAAoB;;AAEtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,UAAU;EACV,yBAAyB;;EAEzB,aAAa;EACb,sBAAsB;EACtB,uBAAuB;EACvB,YAAY;EACZ,sBAAsB;AACxB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,qBAAqB;AACvB;;AAEA;EACE,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,iCAAiC;EACjC,mBAAmB;EACnB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,eAAe;EACf,iBAAiB;EACjB,gBAAgB;EAChB,kBAAkB;EAClB,mBAAmB;;EAEnB,eAAe;EACf,eAAe;AACjB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,0BAA0B;AAC5B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,qBAAqB;;AAEvB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,mBAAmB;AACvB","sourcesContent":[".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board button {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 4px;\n\tcolor: #3d4550;\n    border-radius: 25px;\n    border: none;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n#username-input {\n    padding: 8px;\n\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n  background: #2c343e;\n  border: 5px solid #2c343e;\n  border-radius: 45px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n  font-size: 19px;\n  font-weight: 700;\n  margin: 13px auto;\n  outline: none;\n  padding: 11px 30px;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding-left: 10px;\n  font-size: 16px;\n  text-decoration: underline;\n}\n\n.room .wrapper-button  button{\n  display: flex;\n  justify-content: center;\n  align-items: baseline;\n\n}\n\n.my-turn-container {\n    visibility: hidden;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

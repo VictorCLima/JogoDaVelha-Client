@@ -1,78 +1,20 @@
 import { createElement } from '../../utils';
+import BoardSquare from '../boardSquare';
 
-export default function Board(socket, data) {
-    const board = createElement('div', {}, [
-        createElement('div', {
-            id: casa11
-            onclick: () => {
+export default function Board(gameBoard, onClick) {
+    const children = gameBoard.map((row, rowIndex) =>
+        createElement(
+            'div',
+            {},
+            row.map((item, columnIndex) =>
+                BoardSquare(item, () => {
+                    onClick(rowIndex, columnIndex);
+                }),
+            ),
+        ),
+    );
 
-                });
-            },
-        }),
-        createElement('div', {
-            onclick: () => {
-
-                });
-            },
-        }),
-        createElement('div', {
-
-            onclick: () => {
-                });
-            },
-        }),
-
-        createElement('div', {
-            onclick: () => {
-                socket.emit('sendNewMove', {
-                    playerName: socket.id,
-                    data: [],
-                });
-            },
-        }),
-
-        createElement('div', {
-            onclick: () => {
-                socket.emit('sendNewMove', {
-                    playerName: socket.id,
-                    data: [],
-                });
-            },
-        }),
-        createElement('div', {
-            onclick: () => {
-                socket.emit('sendNewMove', {
-                    playerName: socket.id,
-                    data: [],
-                });
-            },
-        }),
-        createElement('div', {
-            onclick: () => {
-                socket.emit('sendNewMove', {
-                    playerName: socket.id,
-                    data: [],
-                });
-            },
-        }),
-
-        createElement('div', {
-            onclick: () => {
-                socket.emit('sendNewMove', {
-                    playerName: socket.id,
-                    data: [],
-                });
-            },
-        }),
-        createElement('div', {
-            onclick: () => {
-                socket.emit('sendNewMove', {
-                    playerName: socket.id,
-                    data: [],
-                });
-            },
-        }),
-    ]);
+    const board = createElement('div', {}, children);
 
     return board;
 }

@@ -6,14 +6,15 @@
   justify-content: space-between;
 }
 
-.wrapper-board input {
+.wrapper-board button {
 	background-color:#F7FE2E;
 	font-size: 6vw;
 	width: 10vw;
 	height:10vw;
-	margin: 0;
-	color: #F7FE2E;
+	margin: 4px;
+	color: #3d4550;
     border-radius: 25px;
+    border: none;
 
 }
  .wrapper-contend .wrapper-board {
@@ -121,4 +122,12 @@ a {
   justify-content: center;
   align-items: baseline;
 
+}
+
+.my-turn-container {
+    visibility: hidden;
+}
+
+.my-turn-container.visible {
+    visibility: visible;
 }
