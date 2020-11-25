@@ -3,7 +3,9 @@ import { createElement } from '../../utils';
 const UserListItem = (user, loggedUsername, socket) => {
     const children = [
         createElement('span', {
-            innerText: user.name,
+            innerText: `${user.name}${
+                user.name === loggedUsername ? ' (Você)' : ''
+            }`,
         }),
     ];
 

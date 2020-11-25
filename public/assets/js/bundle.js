@@ -198,7 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var UserListItem = function UserListItem(user, loggedUsername, socket) {
   var children = [(0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('span', {
-    innerText: user.name
+    innerText: "".concat(user.name).concat(user.name === loggedUsername ? ' (Você)' : '')
   })];
 
   if (user.name !== loggedUsername) {
