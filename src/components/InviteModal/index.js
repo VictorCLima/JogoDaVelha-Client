@@ -13,6 +13,10 @@ export default function Modal(invitingUserName, loggedUserName, socket) {
                     inviterName: invitingUserName,
                     name: loggedUserName,
                 });
+                socket.emit('createNewGame', {
+                    inviterName: invitingUserName,
+                    name: loggedUserName,
+                });
             },
         }),
 
