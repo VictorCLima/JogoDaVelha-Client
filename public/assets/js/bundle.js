@@ -172,6 +172,31 @@ function exitLobby(connection) {
 
 /***/ }),
 
+/***/ "./src/events/getUserInfo.js":
+/*!***********************************!*\
+  !*** ./src/events/getUserInfo.js ***!
+  \***********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ getUserInfo
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils */ "./src/utils/index.js");
+
+function getUserInfo(connection) {
+  connection.socket.on('user', function (userInfo) {
+    if (userInfo.inGame) (0,_utils__WEBPACK_IMPORTED_MODULE_0__.push)('/game');else (0,_utils__WEBPACK_IMPORTED_MODULE_0__.push)('/lobby');
+  });
+}
+
+/***/ }),
+
 /***/ "./src/events/getUserlist.js":
 /*!***********************************!*\
   !*** ./src/events/getUserlist.js ***!
@@ -214,6 +239,7 @@ function getUserlistEvent(connection) {
 /*! namespace exports */
 /*! export enterLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/enterLobby.js .default */
 /*! export exitLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/exitLobby.js .default */
+/*! export getUserInfoEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getUserInfo.js .default */
 /*! export getUserlistEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getUserlist.js .default */
 /*! export loadUserEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/loadUser.js .default */
 /*! export receiveNotificationEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/receiveNotification.js .default */
@@ -226,15 +252,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "enterLobbyEvent": () => /* reexport safe */ _enterLobby__WEBPACK_IMPORTED_MODULE_0__.default,
 /* harmony export */   "exitLobbyEvent": () => /* reexport safe */ _exitLobby__WEBPACK_IMPORTED_MODULE_1__.default,
-/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_2__.default,
-/* harmony export */   "loadUserEvent": () => /* reexport safe */ _loadUser__WEBPACK_IMPORTED_MODULE_3__.default,
-/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_4__.default
+/* harmony export */   "getUserInfoEvent": () => /* reexport safe */ _getUserInfo__WEBPACK_IMPORTED_MODULE_2__.default,
+/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_3__.default,
+/* harmony export */   "loadUserEvent": () => /* reexport safe */ _loadUser__WEBPACK_IMPORTED_MODULE_4__.default,
+/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_5__.default
 /* harmony export */ });
 /* harmony import */ var _enterLobby__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enterLobby */ "./src/events/enterLobby.js");
 /* harmony import */ var _exitLobby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exitLobby */ "./src/events/exitLobby.js");
-/* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
-/* harmony import */ var _loadUser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loadUser */ "./src/events/loadUser.js");
-/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
+/* harmony import */ var _getUserInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getUserInfo */ "./src/events/getUserInfo.js");
+/* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
+/* harmony import */ var _loadUser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loadUser */ "./src/events/loadUser.js");
+/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
+
 
 
 
@@ -392,10 +421,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "initEvents": () => /* binding */ initEvents
 /* harmony export */ });
 /* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../events */ "./src/events/index.js");
+/* harmony import */ var _events_getUserInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../events/getUserInfo */ "./src/events/getUserInfo.js");
+
 
 var initEvents = function initEvents(connection) {
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.loadUserEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.getUserlistEvent)(connection);
+  (0,_events_getUserInfo__WEBPACK_IMPORTED_MODULE_1__.default)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.receiveNotificationEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.exitLobbyEvent)(connection);
@@ -539,7 +571,6 @@ function removeElementsChilds(element) {
   \**************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 6:0-14 */
 /***/ ((module) => {
 
 
@@ -711,7 +742,6 @@ Backoff.prototype.setJitter = function(jitter){
   \**********************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 16:0-14 */
 /***/ ((module) => {
 
 /**
@@ -747,7 +777,6 @@ module.exports = function(obj, fn){
   \*************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 7:2-16 */
 /***/ ((module) => {
 
 
@@ -1028,7 +1057,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper-contend {\r\n  width: 100%;\r
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 9:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1107,7 +1135,6 @@ module.exports = function (cssWithMappingToString) {
   \************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 15:0-14 */
 /***/ ((module) => {
 
 "use strict";
@@ -1152,10 +1179,6 @@ module.exports = function cssWithMappingToString(item) {
   \*******************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__ */
-/*! CommonJS bailout: module.exports.humanize(...) prevents optimization as module.exports is passed as call context at 143:8-31 */
-/*! CommonJS bailout: exports is used directly at 250:37-44 */
-/*! CommonJS bailout: module.exports is used directly at 250:0-14 */
-/*! CommonJS bailout: module.exports is used directly at 252:21-35 */
 /***/ ((module, exports, __webpack_require__) => {
 
 /* eslint-env browser */
@@ -1432,7 +1455,6 @@ formatters.j = function (v) {
   \******************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 266:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 
@@ -1711,7 +1733,6 @@ module.exports = setup;
   \*****************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 1:0-14 */
 /***/ ((module) => {
 
 module.exports = (() => {
@@ -1733,7 +1754,6 @@ module.exports = (() => {
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Socket = __webpack_require__(/*! ./socket */ "./node_modules/engine.io-client/lib/socket.js");
@@ -1760,7 +1780,6 @@ module.exports.parser = __webpack_require__(/*! engine.io-parser */ "./node_modu
   \*****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 667:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const transports = __webpack_require__(/*! ./transports/index */ "./node_modules/engine.io-client/lib/transports/index.js");
@@ -2440,7 +2459,6 @@ module.exports = Socket;
   \********************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 117:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
@@ -2630,7 +2648,6 @@ function polling(opts) {
   \***********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 215:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Polling = __webpack_require__(/*! ./polling */ "./node_modules/engine.io-client/lib/transports/polling.js");
@@ -2858,7 +2875,6 @@ module.exports = JSONPPolling;
   \*********************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 336:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /* global attachEvent */
@@ -3208,7 +3224,6 @@ module.exports.Request = Request;
   \*****************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 210:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
@@ -3431,7 +3446,6 @@ module.exports = Polling;
   \***************************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 3:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
@@ -3451,7 +3465,6 @@ module.exports = {
   \*******************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 263:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
@@ -3747,7 +3760,6 @@ module.exports.pick = (obj, ...attr) => {
   \*************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 6:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 // browser shim for xmlhttprequest module
@@ -3800,7 +3812,6 @@ module.exports = function(opts) {
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module) => {
 
 const PACKET_TYPES = Object.create(null); // no Map = no polyfill
@@ -3834,7 +3845,6 @@ module.exports = {
   \*******************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 57:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const { PACKET_TYPES_REVERSE, ERROR_PACKET } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
@@ -3904,7 +3914,6 @@ module.exports = decodePacket;
   \*******************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 46:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const { PACKET_TYPES } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
@@ -3963,7 +3972,6 @@ module.exports = encodePacket;
   \****************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__ */
-/*! CommonJS bailout: module.exports is used directly at 36:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const encodePacket = __webpack_require__(/*! ./encodePacket */ "./node_modules/engine.io-parser/lib/encodePacket.browser.js");
@@ -4018,8 +4026,6 @@ module.exports = {
   \****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 11:2-16 */
-/*! CommonJS bailout: module.exports is used directly at 16:2-16 */
 /***/ ((module) => {
 
 
@@ -4049,7 +4055,6 @@ try {
   \**********************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 26:0-14 */
 /***/ ((module) => {
 
 /**
@@ -4276,7 +4281,6 @@ exports.decode = function(qs){
   \****************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 14:0-14 */
 /***/ ((module) => {
 
 /**
@@ -4357,8 +4361,6 @@ function queryKey(uri, query) {
   \******************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_exports__, module, __webpack_require__ */
-/*! CommonJS bailout: exports is used directly at 12:17-24 */
-/*! CommonJS bailout: module.exports is used directly at 12:0-14 */
 /***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
@@ -6015,7 +6017,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module, __webpack_require__.nc, __webpack_require__.* */
-/*! CommonJS bailout: module.exports is used directly at 230:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -6297,7 +6298,6 @@ module.exports = function (list, options) {
   \*************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
-/*! CommonJS bailout: module.exports is used directly at 68:0-14 */
 /***/ ((module) => {
 
 "use strict";
