@@ -4,10 +4,14 @@
   box-sizing: border-box;
 }
 
+html, body {
+    height: 100vh;
+}
+
 body {
   background: #3d4550;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  
+
 }
 
 body,

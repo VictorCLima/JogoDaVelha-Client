@@ -2,7 +2,7 @@ import { createElement } from '../../utils';
 
 const UserListItem = (user, loggedUsername, socket) => {
     const children = [
-        createElement('label', {
+        createElement('span', {
             innerText: user.name,
         }),
     ];
@@ -22,10 +22,10 @@ const UserListItem = (user, loggedUsername, socket) => {
     }
 
     const userListItem = createElement(
-        'div',
+        'li',
         {
             id: user.id,
-            className: 'players',
+            className: 'player-list-item',
         },
         children,
     );

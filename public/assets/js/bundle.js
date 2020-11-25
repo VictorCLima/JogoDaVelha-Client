@@ -91,7 +91,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var UserListItem = function UserListItem(user, loggedUsername, socket) {
-  var children = [(0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('label', {
+  var children = [(0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('span', {
     innerText: user.name
   })];
 
@@ -107,9 +107,9 @@ var UserListItem = function UserListItem(user, loggedUsername, socket) {
     }));
   }
 
-  var userListItem = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('div', {
+  var userListItem = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('li', {
     id: user.id,
-    className: 'players'
+    className: 'player-list-item'
   }, children);
   return userListItem;
 };
@@ -507,17 +507,21 @@ function receiveNotification(connection) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/style.css */ "./src/assets/css/style.css");
-/* harmony import */ var _assets_css_gameStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/css/gameStyle.css */ "./src/assets/css/gameStyle.css");
-/* harmony import */ var _assets_css_reset_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/css/reset.css */ "./src/assets/css/reset.css");
-/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules */ "./src/modules/index.js");
+/* harmony import */ var _assets_css_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/css/index.css */ "./src/assets/css/index.css");
+/* harmony import */ var _assets_css_lobby_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/css/lobby.css */ "./src/assets/css/lobby.css");
+/* harmony import */ var _assets_css_gameStyle_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./assets/css/gameStyle.css */ "./src/assets/css/gameStyle.css");
+/* harmony import */ var _assets_css_reset_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./assets/css/reset.css */ "./src/assets/css/reset.css");
+/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules */ "./src/modules/index.js");
 // css
+
+
 
 
  // Modules
 
 
-var connection = (0,_modules__WEBPACK_IMPORTED_MODULE_3__.initConnection)();
-(0,_modules__WEBPACK_IMPORTED_MODULE_3__.initEvents)(connection);
+var connection = (0,_modules__WEBPACK_IMPORTED_MODULE_5__.initConnection)();
+(0,_modules__WEBPACK_IMPORTED_MODULE_5__.initEvents)(connection);
 
 /***/ }),
 
@@ -1340,7 +1344,69 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board button {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 4px;\n\tcolor: #3d4550;\n    border-radius: 25px;\n    border: none;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 460px;\n    padding-top: 50px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n#username-input {\n    padding: 8px;\n    margin-left: 15px;\n    margin-top: 15px;\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding: 10px;\n  font-size: 18px;\n  font-weight: 400;\n}\n\n.room .players > label:first-child{\n    padding-bottom: 0px;\n}\n\n.room .players  button{\n    color:  #FFF;\n    margin-top: 5px;\n    padding: 5px;\n    background-color: #2c343e;\n    border-radius: 45px;\n    text-transform: uppercase;\n    font-weight: 500;\n    border: none;\n}\n\n.room .players > button:hover {\n    background-color: #3c444d;\n  }\n\n.my-turn-container {\n    visibility: hidden;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.my-turn-container  {\n    text-align: center;\n    padding-top: 40px;\n\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n#notification {\n    font-size: 20px;\n    font-weight: 400;\n    padding-bottom: 200px;\n}\n\n#notification button {\n    color:  #FFF;\n    margin: 10px;\n    padding: 10px;\n    background-color: #2c343e;\n    border-radius: 45px;\n    text-transform: uppercase;\n    font-weight: 500;\n    border: none;\n}\n\n#notification  button:hover {\n    background-color: #3c444d;\n  }\n\n\n\n", "",{"version":3,"sources":["webpack://./src/assets/css/gameStyle.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,iBAAiB;EACjB,8BAA8B;AAChC;;AAEA;CACC,wBAAwB;CACxB,cAAc;CACd,WAAW;CACX,WAAW;CACX,WAAW;CACX,cAAc;IACX,mBAAmB;IACnB,YAAY;;AAEhB;CACC;IACG,qBAAqB;IACrB,mBAAmB;IACnB,iBAAiB;;CAEpB;;AAED;EACE,WAAW;EACX,gBAAgB;EAChB,aAAa;EACb,mBAAmB;EACnB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;IACI,YAAY;IACZ,iBAAiB;IACjB,gBAAgB;IAChB,WAAW;IACX,6BAA6B;IAC7B,yBAAyB;IACzB,kBAAkB;AACtB;;AAEA;EACE,aAAa;EACb,UAAU;EACV,yBAAyB;;EAEzB,aAAa;EACb,sBAAsB;EACtB,uBAAuB;EACvB,YAAY;EACZ,sBAAsB;AACxB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,qBAAqB;AACvB;;AAEA;EACE,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,iCAAiC;EACjC,mBAAmB;EACnB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,eAAe;EACf,iBAAiB;EACjB,gBAAgB;EAChB,kBAAkB;EAClB,mBAAmB;;EAEnB,eAAe;EACf,eAAe;AACjB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,aAAa;EACb,eAAe;EACf,gBAAgB;AAClB;;AAEA;IACI,mBAAmB;AACvB;;AAEA;IACI,YAAY;IACZ,eAAe;IACf,YAAY;IACZ,yBAAyB;IACzB,mBAAmB;IACnB,yBAAyB;IACzB,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,yBAAyB;EAC3B;;AAEF;IACI,kBAAkB;AACtB;;AAEA;IACI,mBAAmB;AACvB;;AAEA;IACI,kBAAkB;IAClB,iBAAiB;;AAErB;AACA;IACI,eAAe;IACf,gBAAgB;AACpB;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,qBAAqB;AACzB;;AAEA;IACI,YAAY;IACZ,YAAY;IACZ,aAAa;IACb,yBAAyB;IACzB,mBAAmB;IACnB,yBAAyB;IACzB,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,yBAAyB;EAC3B","sourcesContent":[".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board button {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 4px;\n\tcolor: #3d4550;\n    border-radius: 25px;\n    border: none;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 460px;\n    padding-top: 50px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n#username-input {\n    padding: 8px;\n    margin-left: 15px;\n    margin-top: 15px;\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding: 10px;\n  font-size: 18px;\n  font-weight: 400;\n}\n\n.room .players > label:first-child{\n    padding-bottom: 0px;\n}\n\n.room .players  button{\n    color:  #FFF;\n    margin-top: 5px;\n    padding: 5px;\n    background-color: #2c343e;\n    border-radius: 45px;\n    text-transform: uppercase;\n    font-weight: 500;\n    border: none;\n}\n\n.room .players > button:hover {\n    background-color: #3c444d;\n  }\n\n.my-turn-container {\n    visibility: hidden;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.my-turn-container  {\n    text-align: center;\n    padding-top: 40px;\n\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n#notification {\n    font-size: 20px;\n    font-weight: 400;\n    padding-bottom: 200px;\n}\n\n#notification button {\n    color:  #FFF;\n    margin: 10px;\n    padding: 10px;\n    background-color: #2c343e;\n    border-radius: 45px;\n    text-transform: uppercase;\n    font-weight: 500;\n    border: none;\n}\n\n#notification  button:hover {\n    background-color: #3c444d;\n  }\n\n\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board button {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 4px;\n\tcolor: #3d4550;\n    border-radius: 25px;\n    border: none;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 460px;\n    padding-top: 50px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n.my-turn-container {\n    visibility: hidden;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.my-turn-container  {\n    text-align: center;\n    padding-top: 40px;\n\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n#notification {\n    font-size: 20px;\n    font-weight: 400;\n    padding-bottom: 200px;\n}\n\n#notification button {\n    color:  #FFF;\n    margin: 10px;\n    padding: 10px;\n    background-color: #2c343e;\n    border-radius: 45px;\n    text-transform: uppercase;\n    font-weight: 500;\n    border: none;\n}\n\n#notification  button:hover {\n    background-color: #3c444d;\n  }\n\n\n\n", "",{"version":3,"sources":["webpack://./src/assets/css/gameStyle.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,iBAAiB;EACjB,8BAA8B;AAChC;;AAEA;CACC,wBAAwB;CACxB,cAAc;CACd,WAAW;CACX,WAAW;CACX,WAAW;CACX,cAAc;IACX,mBAAmB;IACnB,YAAY;;AAEhB;CACC;IACG,qBAAqB;IACrB,mBAAmB;IACnB,iBAAiB;;CAEpB;;AAED;EACE,WAAW;EACX,gBAAgB;EAChB,aAAa;EACb,mBAAmB;EACnB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,mBAAmB;AACvB;;AAEA;IACI,kBAAkB;IAClB,iBAAiB;;AAErB;AACA;IACI,eAAe;IACf,gBAAgB;AACpB;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,qBAAqB;AACzB;;AAEA;IACI,YAAY;IACZ,YAAY;IACZ,aAAa;IACb,yBAAyB;IACzB,mBAAmB;IACnB,yBAAyB;IACzB,gBAAgB;IAChB,YAAY;AAChB;;AAEA;IACI,yBAAyB;EAC3B","sourcesContent":[".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n.wrapper-board button {\n\tbackground-color:#F7FE2E;\n\tfont-size: 6vw;\n\twidth: 10vw;\n\theight:10vw;\n\tmargin: 4px;\n\tcolor: #3d4550;\n    border-radius: 25px;\n    border: none;\n\n}\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 460px;\n    padding-top: 50px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n.my-turn-container {\n    visibility: hidden;\n}\n\n.my-turn-container.visible {\n    visibility: visible;\n}\n\n.my-turn-container  {\n    text-align: center;\n    padding-top: 40px;\n\n}\n.my-turn-container p {\n    font-size: 40px;\n    font-weight: 800;\n}\n\n#notification {\n    font-size: 20px;\n    font-weight: 400;\n    padding-bottom: 200px;\n}\n\n#notification button {\n    color:  #FFF;\n    margin: 10px;\n    padding: 10px;\n    background-color: #2c343e;\n    border-radius: 45px;\n    text-transform: uppercase;\n    font-weight: 500;\n    border: none;\n}\n\n#notification  button:hover {\n    background-color: #3c444d;\n  }\n\n\n\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/assets/css/index.css":
+/*!************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/assets/css/index.css ***!
+  \************************************************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, module.id, __webpack_require__.d, __webpack_require__.*, module */
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/cssWithMappingToString.js */ "./node_modules/css-loader/dist/runtime/cssWithMappingToString.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".index {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-wrap: nowrap;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n\n.index #form {\n    display: flex;\n    flex-direction: column;\n\n    align-items: center;\n}\n\n.index #form input {\n    padding: 8px;\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n\n    width: 100%;\n}\n\n.index #form input:focus {\n    border-color: #343053;\n}\n\n.index #form button {\n    width: 100%\n}\n", "",{"version":3,"sources":["webpack://./src/assets/css/index.css"],"names":[],"mappings":"AAAA;IACI,WAAW;IACX,YAAY;IACZ,aAAa;IACb,iBAAiB;IACjB,uBAAuB;IACvB,mBAAmB;IACnB,sBAAsB;AAC1B;;AAEA;IACI,aAAa;IACb,sBAAsB;;IAEtB,mBAAmB;AACvB;;AAEA;IACI,YAAY;IACZ,WAAW;IACX,6BAA6B;IAC7B,yBAAyB;IACzB,kBAAkB;;IAElB,WAAW;AACf;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI;AACJ","sourcesContent":[".index {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-wrap: nowrap;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n\n.index #form {\n    display: flex;\n    flex-direction: column;\n\n    align-items: center;\n}\n\n.index #form input {\n    padding: 8px;\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #2c343e;\n    border-radius: 5px;\n\n    width: 100%;\n}\n\n.index #form input:focus {\n    border-color: #343053;\n}\n\n.index #form button {\n    width: 100%\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/assets/css/lobby.css":
+/*!************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/assets/css/lobby.css ***!
+  \************************************************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, module.id, __webpack_require__.d, __webpack_require__.*, module */
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/cssWithMappingToString.js */ "./node_modules/css-loader/dist/runtime/cssWithMappingToString.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".lobby {\n    height: 100vh;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.lobby .btn-container {\n    flex: 1;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.room {\n    height: 100vh;\n    width: 30%;\n    background-color: #485463;\n\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n\n    box-shadow: -5px 0px 15px 5px #77007766;\n    border-radius: 20px 0 0 20px;\n\n    padding: 15px;\n\n    color: #fff\n}\n\n.room h2 {\n    line-height: 28px;\n    width: 100%;\n    border-bottom: 1px solid #fff;\n}\n\n.room #waiting-room {\n    margin-top: 16px;\n\n    list-style: none;\n\n    width: 100%;\n\n    padding-right: 40px;\n}\n\n.room .player-list-item {\n    width: 100%;\n\n    color: rgb(226, 5, 226);\n\n    box-shadow: 0px 1px 6px #00000029;\n    letter-spacing: 0px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n\n    font-size: 14px;\n\n    padding: 14px;\n\n    margin-bottom: 8px;\n\n    cursor: pointer;\n    transition: 0.2;\n}\n\n.room .player-list-item button {\n    height: 30px;\n    padding: 4px 8px;\n\n    border-radius: 8px;\n    border: none;\n    cursor: pointer;\n\n    background-color: transparent;\n    border: 1px solid rgb(226, 5, 226);\n    color: rgb(226, 5, 226);\n\n    transition: all 0.2s;\n}\n\n.room .player-list-item button:hover {\n    background-color: rgb(226, 5, 226);\n    border: 1px solid transparent;\n    color: white;\n}\n", "",{"version":3,"sources":["webpack://./src/assets/css/lobby.css"],"names":[],"mappings":"AAAA;IACI,aAAa;;IAEb,aAAa;IACb,mBAAmB;IACnB,uBAAuB;AAC3B;;AAEA;IACI,OAAO;;IAEP,aAAa;IACb,mBAAmB;IACnB,uBAAuB;AAC3B;;AAEA;IACI,aAAa;IACb,UAAU;IACV,yBAAyB;;IAEzB,aAAa;IACb,sBAAsB;IACtB,uBAAuB;;IAEvB,uCAAuC;IACvC,4BAA4B;;IAE5B,aAAa;;IAEb;AACJ;;AAEA;IACI,iBAAiB;IACjB,WAAW;IACX,6BAA6B;AACjC;;AAEA;IACI,gBAAgB;;IAEhB,gBAAgB;;IAEhB,WAAW;;IAEX,mBAAmB;AACvB;;AAEA;IACI,WAAW;;IAEX,uBAAuB;;IAEvB,iCAAiC;IACjC,mBAAmB;IACnB,aAAa;IACb,mBAAmB;IACnB,8BAA8B;;IAE9B,eAAe;;IAEf,aAAa;;IAEb,kBAAkB;;IAElB,eAAe;IACf,eAAe;AACnB;;AAEA;IACI,YAAY;IACZ,gBAAgB;;IAEhB,kBAAkB;IAClB,YAAY;IACZ,eAAe;;IAEf,6BAA6B;IAC7B,kCAAkC;IAClC,uBAAuB;;IAEvB,oBAAoB;AACxB;;AAEA;IACI,kCAAkC;IAClC,6BAA6B;IAC7B,YAAY;AAChB","sourcesContent":[".lobby {\n    height: 100vh;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.lobby .btn-container {\n    flex: 1;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.room {\n    height: 100vh;\n    width: 30%;\n    background-color: #485463;\n\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n\n    box-shadow: -5px 0px 15px 5px #77007766;\n    border-radius: 20px 0 0 20px;\n\n    padding: 15px;\n\n    color: #fff\n}\n\n.room h2 {\n    line-height: 28px;\n    width: 100%;\n    border-bottom: 1px solid #fff;\n}\n\n.room #waiting-room {\n    margin-top: 16px;\n\n    list-style: none;\n\n    width: 100%;\n\n    padding-right: 40px;\n}\n\n.room .player-list-item {\n    width: 100%;\n\n    color: rgb(226, 5, 226);\n\n    box-shadow: 0px 1px 6px #00000029;\n    letter-spacing: 0px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n\n    font-size: 14px;\n\n    padding: 14px;\n\n    margin-bottom: 8px;\n\n    cursor: pointer;\n    transition: 0.2;\n}\n\n.room .player-list-item button {\n    height: 30px;\n    padding: 4px 8px;\n\n    border-radius: 8px;\n    border: none;\n    cursor: pointer;\n\n    background-color: transparent;\n    border: 1px solid rgb(226, 5, 226);\n    color: rgb(226, 5, 226);\n\n    transition: all 0.2s;\n}\n\n.room .player-list-item button:hover {\n    background-color: rgb(226, 5, 226);\n    border: 1px solid transparent;\n    color: white;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1371,7 +1437,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody {\r\n  background: #3d4550;\r\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\r\n  \r\n}\r\n\r\nbody,\r\ninput,\r\nbutton,\r\ntextarea {\r\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\r\n}\r\n", "",{"version":3,"sources":["webpack://./src/assets/css/reset.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;EACE,mBAAmB;EACnB,wDAAwD;;AAE1D;;AAEA;;;;EAIE,wDAAwD;AAC1D","sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody {\r\n  background: #3d4550;\r\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\r\n  \r\n}\r\n\r\nbody,\r\ninput,\r\nbutton,\r\ntextarea {\r\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\r\n}\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nhtml, body {\n    height: 100vh;\n}\n\nbody {\n  background: #3d4550;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\n\n}\n\nbody,\ninput,\nbutton,\ntextarea {\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\n}\n", "",{"version":3,"sources":["webpack://./src/assets/css/reset.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;IACI,aAAa;AACjB;;AAEA;EACE,mBAAmB;EACnB,wDAAwD;;AAE1D;;AAEA;;;;EAIE,wDAAwD;AAC1D","sourcesContent":["* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nhtml, body {\n    height: 100vh;\n}\n\nbody {\n  background: #3d4550;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\n\n}\n\nbody,\ninput,\nbutton,\ntextarea {\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1402,7 +1468,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n  background: #2c343e;\n  border: 5px solid #2c343e;\n  border-radius: 45px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n  font-size: 19px;\n  font-weight: 700;\n  margin: 13px auto;\n  outline: none;\n  padding: 11px 30px;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding-left: 10px;\n  font-size: 16px;\n}\n\n", "",{"version":3,"sources":["webpack://./src/assets/css/style.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,iBAAiB;EACjB,8BAA8B;AAChC;;;CAGC;IACG,qBAAqB;IACrB,mBAAmB;IACnB,iBAAiB;;CAEpB;;AAED;EACE,WAAW;EACX,gBAAgB;EAChB,aAAa;EACb,mBAAmB;EACnB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;EAChB,mBAAmB;EACnB,yBAAyB;EACzB,mBAAmB;EACnB,WAAW;EACX,eAAe;EACf,cAAc;EACd,eAAe;EACf,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,yBAAyB;EACzB,aAAa;EACb,oBAAoB;;AAEtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,UAAU;EACV,yBAAyB;;EAEzB,aAAa;EACb,sBAAsB;EACtB,uBAAuB;EACvB,YAAY;EACZ,sBAAsB;AACxB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,qBAAqB;AACvB;;AAEA;EACE,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,iCAAiC;EACjC,mBAAmB;EACnB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,eAAe;EACf,iBAAiB;EACjB,gBAAgB;EAChB,kBAAkB;EAClB,mBAAmB;;EAEnB,eAAe;EACf,eAAe;AACjB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,kBAAkB;EAClB,eAAe;AACjB","sourcesContent":[".wrapper-contend {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n\n\n .wrapper-contend .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n  background: #2c343e;\n  border: 5px solid #2c343e;\n  border-radius: 45px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n  font-size: 19px;\n  font-weight: 700;\n  margin: 13px auto;\n  outline: none;\n  padding: 11px 30px;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n\n.room {\n  height: 600px;\n  width: 30%;\n  background-color: #485463;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin: 10px;\n  border: 5px solid #707;\n}\n\n.room .players {\n  display: flex;\n  align-items: center;\n  justify-items: center;\n}\n\n.room .players > a {\n  height: 30px;\n  border-radius: 4px;\n  border: 1px solid #707070;\n  box-shadow: 0px 1px 6px #00000029;\n  letter-spacing: 0px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: black;\n  font-size: 14px;\n  margin-left: 10px;\n  margin-top: 10px;\n  padding-left: 10px;\n  padding-right: 10px;\n\n  cursor: pointer;\n  transition: 0.2;\n}\n\n.room .players > a:hover {\n  background-color: #00B7FF;\n}\n\n.room .players > label {\n  padding-left: 10px;\n  font-size: 16px;\n}\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".wrapper-content {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n}\n\n\n .wrapper-content .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n.wrapper-content #form {\n    display: flex;\n    flex-direction: column;\n\n    align-items: center;\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n\n  background: #2c343e;\n  border: none;\n  border-radius: 30px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n\n  font-size: 16px;\n  font-weight: 700;\n\n  margin: 13px auto;\n  padding: 11px 30px;\n\n  outline: none;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n", "",{"version":3,"sources":["webpack://./src/assets/css/style.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,iBAAiB;EACjB,uBAAuB;EACvB,mBAAmB;EACnB,sBAAsB;AACxB;;;CAGC;IACG,qBAAqB;IACrB,mBAAmB;IACnB,iBAAiB;;CAEpB;;AAED;EACE,WAAW;EACX,gBAAgB;EAChB,aAAa;EACb,mBAAmB;EACnB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;IACI,aAAa;IACb,sBAAsB;;IAEtB,mBAAmB;AACvB;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;;EAEhB,mBAAmB;EACnB,YAAY;EACZ,mBAAmB;EACnB,WAAW;EACX,eAAe;EACf,cAAc;;EAEd,eAAe;EACf,gBAAgB;;EAEhB,iBAAiB;EACjB,kBAAkB;;EAElB,aAAa;EACb,yBAAyB;EACzB,aAAa;EACb,oBAAoB;;AAEtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,cAAc;AAChB","sourcesContent":[".wrapper-content {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n}\n\n\n .wrapper-content .wrapper-board {\n    display: inline-block;\n    padding-left: 280px;\n    padding-top: 90px;\n\n }\n\n.wrapper-btn {\n  width: 100%;\n  min-height: 100%;\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: flex-end;\n\n}\n\n.wrapper-content #form {\n    display: flex;\n    flex-direction: column;\n\n    align-items: center;\n}\n\n.btn-game {\n  max-height: 100px;\n  max-width: 200px;\n\n  background: #2c343e;\n  border: none;\n  border-radius: 30px;\n  color: #fff;\n  cursor: pointer;\n  display: block;\n\n  font-size: 16px;\n  font-weight: 700;\n\n  margin: 13px auto;\n  padding: 11px 30px;\n\n  outline: none;\n  text-transform: uppercase;\n  display: flex;\n  align-self: baseline;\n\n}\n.btn-game:hover {\n  background: #363f4a;\n}\na {\n  color: #00B7FF;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6298,6 +6364,74 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_gameStyle_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./src/assets/css/index.css":
+/*!**********************************!*\
+  !*** ./src/assets/css/index.css ***!
+  \**********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js!./index.css */ "./node_modules/css-loader/dist/cjs.js!./src/assets/css/index.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_index_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_index_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./src/assets/css/lobby.css":
+/*!**********************************!*\
+  !*** ./src/assets/css/lobby.css ***!
+  \**********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_lobby_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js!./lobby.css */ "./node_modules/css-loader/dist/cjs.js!./src/assets/css/lobby.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_lobby_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_lobby_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
