@@ -4,6 +4,7 @@ import {
     loadUserEvent,
     getUserlistEvent,
     receiveNotificationEvent,
+    getMoveEvent,
 } from '../events';
 import getUserInfo from '../events/getUserInfo';
 
@@ -17,4 +18,6 @@ export const initEvents = connection => {
 
     receiveNotificationEvent(connection);
     exitLobbyEvent(connection);
+
+    getMoveEvent(connection);
 };

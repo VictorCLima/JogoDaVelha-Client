@@ -23,32 +23,27 @@ const showMyTurn = userInfo => {
     else myTurnDiv.classList.remove('visible');
 };
 
-const onClickSquare = (userInfo, connection) => (x, y) => {
+const onClickSquare = connection => (x, y) => {
     const {
         gameBoard: { board },
         playerTurn,
         playerType,
-    } = userInfo;
+    } = connection.userInfo;
 
     if (!isMyTurn(playerTurn, playerType)) return;
 
     board[x][y] = playerType;
 
-    userInfo.gameBoard.board = board;
-    userInfo.playerTurn = !playerTurn;
+    connection.userInfo.gameBoard.board = board;
+    connection.userInfo.playerTurn = !playerTurn;
 
     connection.socket.emit('newMove', {
         name: connection.username,
-        gameBoard: userInfo.gameBoard,
+        gameBoard: connection.userInfo.gameBoard,
     });
-
-    renderGameboard(userInfo.gameBoard, onClickSquare(userInfo, connection));
-    showMyTurn(userInfo);
 };
 
-export const setupGame = (userInfo, connection) => {
-    console.log(userInfo);
-
-    renderGameboard(userInfo.gameBoard, onClickSquare(userInfo, connection));
-    showMyTurn(userInfo);
+export const setupGame = connection => {
+    renderGameboard(connection.userInfo.gameBoard, onClickSquare(connection));
+    showMyTurn(connection.userInfo);
 };

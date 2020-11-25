@@ -5,7 +5,8 @@ export default function getUserInfo(connection) {
     connection.socket.on('user', userInfo => {
         if (userInfo.inGame) {
             push('/game');
-            setupGame(userInfo, connection);
+            connection.userInfo = userInfo;
+            setupGame(connection);
         } else push('/lobby');
     });
 }

@@ -1,6 +1,33 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! unknown exports (runtime-defined) */
+/*! runtime requirements: module */
+/***/ ((module) => {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
 /***/ "./src/components/InviteModal/index.js":
 /*!*********************************************!*\
   !*** ./src/components/InviteModal/index.js ***!
@@ -112,7 +139,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function BoardSquare(item, onClick) {
   var innerText = (0,_utils_getChildrenStyle__WEBPACK_IMPORTED_MODULE_1__.getChildrenStyle)(item);
-  console.log(item, (0,_utils_getChildrenStyle__WEBPACK_IMPORTED_MODULE_1__.getChildrenStyle)(item));
   var boardSquare = (0,_utils__WEBPACK_IMPORTED_MODULE_0__.createElement)('button', {
     innerText: innerText,
     onclick: onClick
@@ -259,6 +285,50 @@ function exitLobby(connection) {
 
 /***/ }),
 
+/***/ "./src/events/getMove.js":
+/*!*******************************!*\
+  !*** ./src/events/getMove.js ***!
+  \*******************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modules_gameSetup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/gameSetup */ "./src/modules/gameSetup.js");
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+var getMove = function getMove(connection) {
+  connection.socket.on('newMove', function (data) {
+    var gameBoard = data.gameBoard,
+        playerTurn = data.playerTurn;
+    var userInfo = connection.userInfo;
+    if (!userInfo) return;
+    connection.userInfo = _objectSpread(_objectSpread({}, userInfo), {}, {
+      gameBoard: gameBoard,
+      playerTurn: playerTurn
+    });
+    (0,_modules_gameSetup__WEBPACK_IMPORTED_MODULE_1__.setupGame)(connection);
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getMove);
+
+/***/ }),
+
 /***/ "./src/events/getUserInfo.js":
 /*!***********************************!*\
   !*** ./src/events/getUserInfo.js ***!
@@ -282,7 +352,8 @@ function getUserInfo(connection) {
   connection.socket.on('user', function (userInfo) {
     if (userInfo.inGame) {
       (0,_utils__WEBPACK_IMPORTED_MODULE_1__.push)('/game');
-      (0,_modules__WEBPACK_IMPORTED_MODULE_0__.setupGame)(userInfo, connection);
+      connection.userInfo = userInfo;
+      (0,_modules__WEBPACK_IMPORTED_MODULE_0__.setupGame)(connection);
     } else (0,_utils__WEBPACK_IMPORTED_MODULE_1__.push)('/lobby');
   });
 }
@@ -331,6 +402,7 @@ function getUserlistEvent(connection) {
 /*! namespace exports */
 /*! export enterLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/enterLobby.js .default */
 /*! export exitLobbyEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/exitLobby.js .default */
+/*! export getMoveEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getMove.js .default */
 /*! export getUserInfoEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getUserInfo.js .default */
 /*! export getUserlistEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/getUserlist.js .default */
 /*! export loadUserEvent [provided] [no usage info] [missing usage info prevents renaming] -> ./src/events/loadUser.js .default */
@@ -344,17 +416,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "enterLobbyEvent": () => /* reexport safe */ _enterLobby__WEBPACK_IMPORTED_MODULE_0__.default,
 /* harmony export */   "exitLobbyEvent": () => /* reexport safe */ _exitLobby__WEBPACK_IMPORTED_MODULE_1__.default,
-/* harmony export */   "getUserInfoEvent": () => /* reexport safe */ _getUserInfo__WEBPACK_IMPORTED_MODULE_2__.default,
-/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_3__.default,
-/* harmony export */   "loadUserEvent": () => /* reexport safe */ _loadUser__WEBPACK_IMPORTED_MODULE_4__.default,
-/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_5__.default
+/* harmony export */   "getMoveEvent": () => /* reexport safe */ _getMove__WEBPACK_IMPORTED_MODULE_2__.default,
+/* harmony export */   "getUserInfoEvent": () => /* reexport safe */ _getUserInfo__WEBPACK_IMPORTED_MODULE_3__.default,
+/* harmony export */   "getUserlistEvent": () => /* reexport safe */ _getUserlist__WEBPACK_IMPORTED_MODULE_4__.default,
+/* harmony export */   "loadUserEvent": () => /* reexport safe */ _loadUser__WEBPACK_IMPORTED_MODULE_5__.default,
+/* harmony export */   "receiveNotificationEvent": () => /* reexport safe */ _receiveNotification__WEBPACK_IMPORTED_MODULE_6__.default
 /* harmony export */ });
 /* harmony import */ var _enterLobby__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enterLobby */ "./src/events/enterLobby.js");
 /* harmony import */ var _exitLobby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./exitLobby */ "./src/events/exitLobby.js");
-/* harmony import */ var _getUserInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getUserInfo */ "./src/events/getUserInfo.js");
-/* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
-/* harmony import */ var _loadUser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loadUser */ "./src/events/loadUser.js");
-/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
+/* harmony import */ var _getMove__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getMove */ "./src/events/getMove.js");
+/* harmony import */ var _getUserInfo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getUserInfo */ "./src/events/getUserInfo.js");
+/* harmony import */ var _getUserlist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getUserlist */ "./src/events/getUserlist.js");
+/* harmony import */ var _loadUser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./loadUser */ "./src/events/loadUser.js");
+/* harmony import */ var _receiveNotification__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./receiveNotification */ "./src/events/receiveNotification.js");
+
 
 
 
@@ -523,6 +598,7 @@ var initEvents = function initEvents(connection) {
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.enterLobbyEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.receiveNotificationEvent)(connection);
   (0,_events__WEBPACK_IMPORTED_MODULE_0__.exitLobbyEvent)(connection);
+  (0,_events__WEBPACK_IMPORTED_MODULE_0__.getMoveEvent)(connection);
 };
 
 /***/ }),
@@ -561,28 +637,26 @@ var showMyTurn = function showMyTurn(userInfo) {
   if ((0,_utils__WEBPACK_IMPORTED_MODULE_1__.isMyTurn)(userInfo.playerTurn, userInfo.playerType)) myTurnDiv.classList.add('visible');else myTurnDiv.classList.remove('visible');
 };
 
-var onClickSquare = function onClickSquare(userInfo, connection) {
+var onClickSquare = function onClickSquare(connection) {
   return function (x, y) {
-    var board = userInfo.gameBoard.board,
-        playerTurn = userInfo.playerTurn,
-        playerType = userInfo.playerType;
+    var _connection$userInfo = connection.userInfo,
+        board = _connection$userInfo.gameBoard.board,
+        playerTurn = _connection$userInfo.playerTurn,
+        playerType = _connection$userInfo.playerType;
     if (!(0,_utils__WEBPACK_IMPORTED_MODULE_1__.isMyTurn)(playerTurn, playerType)) return;
     board[x][y] = playerType;
-    userInfo.gameBoard.board = board;
-    userInfo.playerTurn = !playerTurn;
+    connection.userInfo.gameBoard.board = board;
+    connection.userInfo.playerTurn = !playerTurn;
     connection.socket.emit('newMove', {
       name: connection.username,
-      gameBoard: userInfo.gameBoard
+      gameBoard: connection.userInfo.gameBoard
     });
-    renderGameboard(userInfo.gameBoard, onClickSquare(userInfo, connection));
-    showMyTurn(userInfo);
   };
 };
 
-var setupGame = function setupGame(userInfo, connection) {
-  console.log(userInfo);
-  renderGameboard(userInfo.gameBoard, onClickSquare(userInfo, connection));
-  showMyTurn(userInfo);
+var setupGame = function setupGame(connection) {
+  renderGameboard(connection.userInfo.gameBoard, onClickSquare(connection));
+  showMyTurn(connection.userInfo);
 };
 
 /***/ }),
