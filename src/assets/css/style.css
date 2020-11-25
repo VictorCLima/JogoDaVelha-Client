@@ -26,13 +26,6 @@
 
 }
 
-.wrapper-content #form {
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-}
-
 .btn-game {
   max-height: 100px;
   max-width: 200px;
