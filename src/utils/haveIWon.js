@@ -64,6 +64,7 @@ const checkWinnerOnAscendingDiagonal = board => {
 
 export default function haveIWon(board) {
     let possibleWinner = checkWinnerOnRows(board);
+    console.log(possibleWinner);
     if (possibleWinner !== null) return possibleWinner;
 
     possibleWinner = checkWinnerOnColumns(board);

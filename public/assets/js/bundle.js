@@ -649,11 +649,16 @@ var onClickSquare = function onClickSquare(connection) {
     connection.userInfo.playerTurn = !playerTurn;
     var iWon = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.haveIWon)(board);
     console.log(iWon);
-    if (iWon !== null) connection.socket.emit('endgame', {
-      name: connection.username,
-      winner: iWon,
-      gameBoard: connection.userInfo.gameBoard
-    });else connection.socket.emit('newMove', {
+
+    if (iWon !== null) {
+      connection.socket.emit('endgame', {
+        name: connection.username,
+        winner: iWon,
+        gameBoard: connection.userInfo.gameBoard
+      });
+      alert("".concat(connection.username, " ganhou. Voc\xEA retornar\xE1 para o lobby"));
+      (0,_utils__WEBPACK_IMPORTED_MODULE_1__.push)('/lobby');
+    } else connection.socket.emit('newMove', {
       name: connection.username,
       gameBoard: connection.userInfo.gameBoard
     });
@@ -802,6 +807,7 @@ var checkWinnerOnAscendingDiagonal = function checkWinnerOnAscendingDiagonal(boa
 
 function haveIWon(board) {
   var possibleWinner = checkWinnerOnRows(board);
+  console.log(possibleWinner);
   if (possibleWinner !== null) return possibleWinner;
   possibleWinner = checkWinnerOnColumns(board);
   if (possibleWinner !== null) return possibleWinner;

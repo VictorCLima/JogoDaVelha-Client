@@ -1,5 +1,6 @@
 import Board from '../components/gameBoard';
-import { haveIWon, isMyTurn, removeElementsChilds } from '../utils';
+
+import { haveIWon, isMyTurn, removeElementsChilds, push } from '../utils';
 
 const renderGameboard = (gameBoard, onClickSquare) => {
     const boardDiv = document.querySelector('.wrapper-board');
@@ -39,13 +40,15 @@ const onClickSquare = connection => (x, y) => {
 
     const iWon = haveIWon(board);
     console.log(iWon);
-    if (iWon !== null)
+    if (iWon !== null) {
         connection.socket.emit('endgame', {
             name: connection.username,
             winner: iWon,
             gameBoard: connection.userInfo.gameBoard,
         });
-    else
+        alert(`${connection.username} ganhou. Você retornará para o lobby`);
+        push('/lobby');
+    } else
         connection.socket.emit('newMove', {
             name: connection.username,
             gameBoard: connection.userInfo.gameBoard,
