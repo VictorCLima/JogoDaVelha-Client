@@ -4,7 +4,7 @@ export default function receiveNotification(connection) {
     connection.socket.on('newInvite', ({ inviterName }) => {
         if (!connection.username) return;
 
-        const body = document.querySelector('body');
+        const body = document.getElementById('notification');
 
         if (!body) return;
 

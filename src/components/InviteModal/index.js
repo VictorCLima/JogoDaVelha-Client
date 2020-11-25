@@ -3,7 +3,7 @@ import { createElement } from '../../utils';
 export default function Modal(invitingUserName, loggedUserName, socket) {
     const modal = createElement('div', {}, [
         document.createTextNode(
-            `${invitingUserName} esta te chamando para a batalha`,
+            `${invitingUserName} esta te chamando para a jogar`,
         ),
 
         createElement('button', {
